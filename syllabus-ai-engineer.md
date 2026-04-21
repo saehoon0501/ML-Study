@@ -6,6 +6,9 @@
 You make better engineering decisions because you understand the math,
 and better research decisions because you understand production constraints.
 
+**End goal:** Build your own product — a custom fine-tuned LLM deployed
+as an agentic application (LangGraph/LangChain). Every phase feeds this.
+
 **Target roles:** AI Engineer, ML Engineer, Applied ML Scientist
 **Total: ~16-20 weeks** at 10-15 hrs/week (master's level depth)
 
@@ -17,8 +20,16 @@ Each phase has two tracks that reinforce each other:
 - **Theory** — understand why things work (and when they break)
 - **Systems** — build the thing, deploy the thing, measure the thing
 
-You're not learning theory for its own sake. Every theoretical concept maps to
-an engineering decision you'll make in production.
+Everything funnels toward one outcome:
+**Custom fine-tuned model → agentic app (LangGraph/LangChain) → shipped product**
+
+- P1-3: Understand models deeply enough to choose and customize the right one
+- P4: Fine-tune YOUR model for your product's task
+- P5: Optimize your agent's retrieval pipeline
+- P6: Add multimodal capability (if your product needs it)
+- P7: Evaluate your model + agent system rigorously
+- P8: Theory behind your production stack
+- Portfolio: The product MVP itself
 
 ---
 
@@ -38,6 +49,9 @@ training fails, why loss curves look wrong, and what hyperparameters actually do
     - https://karpathy.ai/zero-to-hero.html
 - [ ] Karpathy — Video 4: Becoming a Backprop Ninja
     - Why: diagnosing training issues requires understanding gradients deeply
+- [ ] Karpathy — Video 5: Let's reproduce GPT-2 (**critical**)
+    - Real training pipeline, distributed training concepts, end-to-end reproduction
+    - Bridges Phase 1 → Phase 2 naturally
 
 ### Systems Track
 
@@ -74,6 +88,12 @@ attention patterns, why retrieval helps, and what fine-tuning actually changes.
 - [ ] **Paper:** "Attention Is All You Need" (Vaswani et al., 2017)
     - Read alongside the Annotated Transformer
     - https://arxiv.org/abs/1706.03762
+- [ ] Modern architecture components (post-2017 additions now standard in all LLMs)
+    - RoPE (Rotary Position Embeddings) — replaces sinusoidal PE
+    - GQA (Grouped Query Attention) — Llama 2/3/4, Mistral; being challenged by MLA (Multi-Head Latent Attention, DeepSeek) which achieves 93% KV cache reduction
+    - FlashAttention (now v4, March 2026) — efficient attention computation
+    - RMSNorm (replaces LayerNorm), SwiGLU activation (replaces ReLU/GELU)
+    - Resource: Umar Jamil's YouTube deep-dives on each component
 
 ### Systems Track
 
@@ -86,8 +106,8 @@ attention patterns, why retrieval helps, and what fine-tuning actually changes.
     - https://learn.deeplearning.ai/courses/attention-in-transformers-concepts-and-code-in-pytorch
 
 **You're done when:** You can whiteboard Q/K/V attention, explain why
-`sqrt(d_k)` scaling matters, why positional encoding is needed, and
-what happens inside a feed-forward layer — AND you've built one that trains.
+`sqrt(d_k)` scaling matters, why RoPE replaced sinusoidal PE, how GQA
+reduces KV cache, and what Flash Attention changes — AND you've built one that trains.
 
 ---
 
@@ -111,12 +131,19 @@ for the models you'll use in production.
     - https://stanford-cs336.github.io/spring2025/
 - [ ] **Paper (skim):** Chinchilla "Training Compute-Optimal LLMs" (Hoffmann et al., 2022)
     - Core insight: most models are over-parameterized and under-trained
-    - Why it matters: helps you evaluate whether a model is well-trained
+    - **Post-Chinchilla update:** Llama 3 showed "inference-optimal" training (train smaller models longer) supersedes Chinchilla for deployment. Read the Llama 3.1 technical report for this.
+- [ ] Mixture of Experts (MoE) — now dominant in frontier models
+    - How sparse routing works, why MoE enables massive models with modest compute
+    - DeepSeek-V3/R1 technical reports: Multi-head Latent Attention (MLA), cost-efficient MoE, reasoning models
+    - Mixtral as the accessible open-source example
+- [ ] State-space models awareness (Mamba/Mamba-2, Jamba hybrid)
+    - Not dominant yet, but architecturally important for interviews
 
 ### Systems Track
 
 - [ ] Understand inference optimization: KV cache, continuous batching, PagedAttention
     - Read vLLM blog post on PagedAttention
+    - SGLang as emerging alternative (RadixAttention for shared-prefix workloads)
 - [ ] **Exercise:** Given a model size and GPU specs, calculate:
     - Memory required for inference (weights + KV cache)
     - Expected throughput (tokens/sec)
@@ -139,14 +166,20 @@ why rank-4 vs rank-16 matters, and when fine-tuning is the wrong approach.
 - [ ] **Paper:** LoRA (Hu et al., 2021)
     - Core insight: weight updates during fine-tuning are low-rank
     - Understand: why low-rank decomposition works, rank selection tradeoffs
+- [ ] **Paper:** DoRA (Liu et al., 2024) — Weight-Decomposed Low-Rank Adaptation
+    - Production-ready in PEFT, consistently outperforms LoRA at same rank
+    - https://arxiv.org/abs/2402.09353
 - [ ] **Paper:** QLoRA (Dettmers et al., 2023)
     - 4-bit quantization + LoRA = fine-tune large models on small GPUs
     - Understand: NF4 quantization, double quantization, paged optimizers
 - [ ] Alignment methods: understand the landscape
     - SFT (supervised fine-tuning) — when and why
-    - DPO (Direct Preference Optimization) — simpler alternative to RLHF
-    - RLHF — conceptual understanding of the pipeline
-    - Read: CS336 Lecture on alignment or Chip Huyen's RLHF blog
+    - DPO (Direct Preference Optimization) — the practical default for alignment
+    - ORPO, KTO — simpler alternatives gaining traction (TRL supports both natively)
+    - RLHF — conceptual understanding only (rarely used directly in practice now)
+- [ ] **Decision framework:** When NOT to fine-tune
+    - Prompting > few-shot > RAG > fine-tuning (escalation ladder)
+    - Read: Hamel Husain's blog posts on this decision
 
 ### Systems Track
 
@@ -155,17 +188,22 @@ why rank-4 vs rank-16 matters, and when fine-tuning is the wrong approach.
 - [ ] Key libraries deep dive:
     - `transformers` — model loading, inference, tokenization
     - `datasets` — loading and processing training data
-    - `peft` — LoRA, QLoRA configuration and tradeoffs
-    - `trl` — SFTTrainer, DPO training
+    - `peft` — LoRA, DoRA, QLoRA configuration and tradeoffs
+    - `trl` — SFTTrainer, DPO/ORPO/KTO trainers
     - `accelerate` — multi-GPU training
+    - **Unsloth** — 2-5x faster fine-tuning, 60-80% less VRAM. Use as default for QLoRA workflows.
+    - **Argilla** — data annotation and curation (the hardest part of fine-tuning in practice)
 - [ ] HF LLM Course Chapter 11 — Supervised Fine-Tuning
     - https://huggingface.co/learn/llm-course/chapter11/3
 - [ ] Phil Schmid — "How to Fine-Tune Open LLMs in 2025"
     - https://www.philschmid.de/fine-tune-llms-in-2025
-- [ ] **Project: Fine-tune a 7B model with QLoRA for a specific task**
-    - Pick a model (Llama 3, Mistral, Qwen)
-    - Prepare a custom dataset (not a canned one — practice data curation)
-    - Train with different LoRA ranks, compare results
+- [ ] **Project: Fine-tune a model with QLoRA + Unsloth for a specific task**
+    - Pick a model: **Qwen 3 8B** (Apache 2.0, best benchmarks) or **Llama 4 Scout** (17B MoE, largest ecosystem)
+    - Prepare a custom dataset with Argilla (not a canned one — practice data curation)
+    - Quality over quantity: 1K high-quality examples often beats 50K noisy ones
+    - Train with DoRA, different ranks, compare results
+    - Get chat templates right (the #1 silent failure mode in fine-tuning)
+    - Experiment with model merging (mergekit — SLERP/TIES/DARE)
     - Push to HF Hub
 
 | Method | VRAM | Example GPU | Trainable Params |
@@ -188,7 +226,10 @@ This phase fills the theoretical gaps behind what you already do in production.
 ### Theory Track (focus area)
 
 - [ ] Embedding models — how text becomes vectors
-    - Sentence-BERT, E5, BGE model families
+    - Foundations: Sentence-BERT, E5, BGE (baselines to understand)
+    - Current SOTA: Gemini Embedding 001, Qwen3-Embedding-8B, Jina v5, Voyage AI — check MTEB leaderboard
+    - Note: MTEB v2 (2026) scores ≠ MTEB v1 — not directly comparable
+    - https://huggingface.co/spaces/mteb/leaderboard
     - Understand: contrastive learning (InfoNCE loss), cosine similarity, embedding dimensions
     - Why some queries "miss" relevant documents (semantic gap)
 - [ ] Vector search internals
@@ -200,6 +241,13 @@ This phase fills the theoretical gaps behind what you already do in production.
 - [ ] **Paper (skim):** "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks" (Lewis et al., 2020)
 - [ ] Advanced RAG patterns you may not have used
     - HyDE (Hypothetical Document Embeddings), Self-RAG, Corrective RAG
+    - GraphRAG (Microsoft, 2024) — graph-based community summarization for global queries
+    - RAPTOR (Stanford, 2024) — recursive abstractive tree-structured retrieval
+    - Late Chunking (Jina AI) — embed long docs before chunking to preserve context
+    - Agentic RAG — agents that plan retrieval steps dynamically (theory, not implementation)
+- [ ] RAG evaluation beyond RAGAS
+    - ARES (automated RAG eval, Stanford)
+    - Text-to-SQL as a retrieval pattern (structured + semantic hybrid)
 - [ ] Context engineering for agents
     - Read: Anthropic "Effective context engineering for AI agents"
 
@@ -216,23 +264,27 @@ what contrastive learning does. Not just "it works" but "here's why."
 
 ---
 
-## Phase 6: Multimodal AI (1.5 weeks)
+## Phase 6: Multimodal AI (1 week, conditional)
 
-The JD explicitly calls for "텍스트, 이미지, 구조화된 데이터."
-Commerce domains are inherently multimodal — products have images,
-descriptions, specs, reviews, and structured attributes.
+**Keep if** your product involves images, audio, or mixed media.
+**Skip if** your product is text + structured data only — redirect
+those 7 days to the portfolio artifact build.
 
 ### Theory Track
 
 - [ ] Vision Transformers (ViT) — how transformers process images
     - Patch embedding, position encoding for 2D
 - [ ] Vision-Language Models (VLMs)
-    - Architecture patterns: CLIP, LLaVA, Flamingo-style
+    - Historical: CLIP, LLaVA, Flamingo (understand the architecture patterns)
+    - Current SOTA: **GLM-4.5V** (106B MoE, top benchmarks), **Qwen2.5-VL-72B**, Molmo
     - How vision encoders connect to language models
     - Contrastive vs. generative multimodal training
-- [ ] Structured data + LLMs
-    - Table understanding, schema-aware prompting
-    - Text-to-SQL approaches
+- [ ] **ColPali** — vision-based document retrieval (bypasses OCR + chunking entirely)
+    - Bridges Phase 5 (RAG) and Phase 6 — highly relevant to your daily RAG work
+    - https://arxiv.org/abs/2407.01449
+- [ ] Document understanding
+    - OCR-free models: GOT-OCR2.0, DocOwl 2
+    - Audio: Whisper v3, Qwen2-Audio (awareness level)
 
 ### Systems Track
 
@@ -242,7 +294,7 @@ descriptions, specs, reviews, and structured attributes.
 - [ ] **Project: Multimodal product understanding system**
     - Input: product image + text description + structured attributes
     - Tasks: categorization, quality assessment, duplicate detection
-    - Use a VLM (LLaVA or similar) + structured data integration
+    - Use a VLM (**Qwen2.5-VL** or similar) + structured data integration
 
 **You're done when:** You can design a system that takes in a product image,
 its description, and its specs, and makes intelligent decisions about
@@ -266,10 +318,23 @@ knowing if it actually works is hard.
     - Offline evaluation: held-out test sets, cross-validation
     - LLM-as-judge: using stronger models to evaluate weaker ones
     - Human evaluation design: inter-annotator agreement, rubrics
+- [ ] **Agent evaluation** (critical — most AI engineers skip this)
+    - Paper: "Survey on Evaluation of LLM-based Agents" (2025) — covers planning, tool use, memory
+    - CLEAR Framework: Cost, Latency, Efficacy, Assurance, Reliability for enterprise agents
+    - Read: Hamel Husain "Selecting the Right AI Evals Tool" — hands-on comparison of tools
+    - Read: Hamel Husain "LLM Evals FAQ" — best practitioner guide
+- [ ] Red-teaming & safety evaluation
+    - Anthropic Bloom — automated behavioral eval generation (open-source)
+    - Promptfoo — open-source automated red-teaming with adversarial prompts
+    - Paper: "Fine-Tuning Lowers Safety" — critical for your fine-tuning work
 - [ ] Experimentation & causal inference basics
     - A/B testing: statistical significance, sample size, guardrail metrics
     - Offline policy evaluation (for ranking/recommendation)
     - When online experiments aren't feasible: backtesting approaches
+- [ ] Continuous evaluation in production
+    - Input drift detection (PSI, KL divergence, embedding drift)
+    - Output quality monitoring over time
+    - Resource: Evidently AI LLM evaluation framework (open-source)
 - [ ] Explore HF Open LLM Leaderboard
     - https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard
 
@@ -279,8 +344,10 @@ knowing if it actually works is hard.
     - `lm-evaluation-harness` (EleutherAI) — standardized benchmarks
     - `deepeval` — custom evaluation pipelines
     - `ragas` — RAG-specific evaluation (faithfulness, relevance, recall)
+    - **Braintrust** — best for CI/CD eval gating + production observability
+    - **Arize Phoenix** — best open-source observability option
     - https://deepeval.com/docs/benchmarks-introduction
-- [ ] **Project: Evaluation pipeline for your RAG system (Phase 5)**
+- [ ] **Project: Evaluation pipeline for your agentic system**
     - Build a test dataset with ground-truth answers
     - Measure: retrieval recall, answer correctness, faithfulness, latency
     - Compare: different chunking strategies, embedding models, retrieval methods
@@ -309,16 +376,28 @@ theory you haven't formalized — no hands-on deployment projects.
 
 - [ ] Quantization theory
     - GPTQ, AWQ, GGUF — how each works mathematically
+    - FP8 (Hopper/Blackwell GPUs), AWQ-Marlin as 2026 production standard
+    - GGUF still relevant for CPU/hybrid inference (llama.cpp, Ollama)
     - Precision vs. quality tradeoffs, when to use which
 - [ ] Inference optimization theory
     - KV caching internals, continuous batching, speculative decoding, PagedAttention
-    - Cost modeling: $/1M tokens for different setups
+    - Framework landscape: **vLLM** (default), **SGLang** (shared-prefix), TensorRT-LLM (raw throughput). TGI is in maintenance mode.
+    - Cost modeling: $/1M tokens, multi-tier model routing, semantic caching
+- [ ] LLM observability (pick one, know the landscape)
+    - **Langfuse** (open-source, self-hostable), LangSmith (best with LangChain/LangGraph)
+    - Helicone (fastest setup, cost tracking), Arize Phoenix (drift detection)
 - [ ] MLOps theory
     - Model versioning, output quality drift detection
     - CI/CD for ML: testing model outputs, regression detection
     - Read: huyenchip.com/mlops
+- [ ] MCP (Model Context Protocol) — awareness level
+    - Industry-standard protocol for connecting LLMs to external tools/data (97M monthly SDK downloads)
+    - Governed by Linux Foundation (AAIF), adopted by Anthropic, OpenAI, Microsoft, AWS, Google
+    - Understand: MCP servers (external tool integration) vs Skills (markdown instructions) — complementary, not competing
+    - Relevant to your agent tool design and LangGraph production patterns
 - [ ] Human-in-the-loop design patterns
     - Confidence routing, feedback loops, active learning
+    - LangGraph 1.0+ (stable Oct 2025): interrupt/resume for human-in-the-loop, PostgresSaver
     - Read: Anthropic "Effective harnesses for long-running agents"
 
 ### Skipped (you already do this)
@@ -333,33 +412,50 @@ when to route to humans. Interview-ready depth.
 
 ---
 
-## Portfolio Artifact: Open-Source Project (5-6 weeks)
+## Portfolio Artifact: Your Product MVP (5-6 weeks)
 
-**This is the #1 deliverable for your master's applications.**
-Ships as v1.0 by end of August. Continues growing through October.
+**This serves two purposes simultaneously:**
+1. The #1 deliverable for your master's applications
+2. The first version of the product you want to build
 
-### Artifact options (choose one)
+### The stack
 
-| Option | Description | Why it works |
-|--------|-------------|-------------|
-| **Agent Evaluation Harness** | Framework for evaluating agentic AI systems | Combines LG CNS agent experience + Phase 7 eval depth |
-| **RAG Quality Benchmark** | Standardized benchmark + eval suite for RAG | Combines production RAG experience + eval skills |
-| **Multi-Agent Coordination Library** | Orchestration patterns with built-in evaluation | Extends your CaNiS work |
+```
+Your custom fine-tuned model (Phase 4)
+        ↓
+Agentic framework (LangGraph/LangChain) — your existing expertise
+        ↓
+RAG pipeline with optimized retrieval (Phase 5 theory)
+        ↓
+Evaluation framework (Phase 7)
+        ↓
+Deployed product with API + demo
+```
 
-### What makes it portfolio-worthy
+### Product domain
 
-- Clean, well-documented code (admissions committees will read it)
-- Real evaluation results on real problems
+TBD — to be decided during Phase 7 (Day 92). By then you'll have:
+- Fine-tuned a model (Phase 4)
+- Deepened RAG theory (Phase 5)
+- Built an eval framework (Phase 7)
+- Enough signal to pick a domain that fits your skills + market gap
+
+### What makes it portfolio-worthy AND product-worthy
+
+- Custom model, not just API wrapper (fine-tuned for specific task)
+- Agentic architecture with real tool use and multi-step reasoning
+- Rigorous evaluation proving it works (not just vibes)
+- Clean, well-documented code (admissions will read it; users will fork it)
 - Working demo (Gradio/Streamlit)
-- Solves a genuine gap in the ecosystem (not a tutorial project)
-- Connects directly to SOP narrative: "I built X at LG CNS, discovered gap Y,
-  and created Z to address it"
+- Solves a real problem (not a tutorial project)
+- SOP narrative: "I built X at LG CNS, discovered gap Y,
+  created Z to address it — now I want to go deeper at [school]"
 
 ### Structure
 
-- **Phase A (2 weeks):** Architecture, core modules, tests, v0.1
-- **Phase B (2.5 weeks):** Advanced features, case study, documentation, demo, v1.0
-- **Phase C (Sep-Oct):** Community sharing, iteration, growth
+- **Phase A (2 weeks):** Architecture, core model + agent pipeline, tests, v0.1
+- **Phase B (2.5 weeks):** Eval results, advanced features, demo, documentation, v1.0
+- **Phase C (Sep-Oct):** User feedback, iteration, growth toward real product
 
 ---
 
@@ -505,8 +601,21 @@ https://www.anthropic.com/engineering — Read these as you reach the relevant p
 
 ### Fine-Tuning Advanced
 
-- LoRA variants: DoRA, rsLoRA — read when you need them, not before
-- Fine-tuning at scale: https://introl.com/blog/fine-tuning-infrastructure-lora-qlora-peft-scale-guide-2025
+- **Unsloth**: https://github.com/unslothai/unsloth — fastest QLoRA workflows
+- **Axolotl**: https://github.com/OpenAccess-AI-Collective/axolotl — YAML-config reproducibility
+- **mergekit**: https://github.com/arcee-ai/mergekit — model merging (SLERP/TIES/DARE)
+- **Argilla**: https://argilla.io — data curation and annotation
+- Sebastian Raschka "Build a Large Language Model (From Scratch)" (Manning, 2024)
+- Sebastian Raschka "Build a Reasoning Model (From Scratch)" (Manning, pub Jul 2026) — sequel covering reasoning/RL
+- Sebastian Raschka's fine-tuning articles: https://magazine.sebastianraschka.com
+- Sebastian Raschka MLA supplement chapter: https://sebastianraschka.com/llms-from-scratch/ch04/05_mla/
+
+### Key References Added by Research (2026)
+
+- Lilian Weng's blog: https://lilianweng.github.io — "The Transformer Family v2", attention mechanisms
+- CMU 11-711 / 11-667 lecture slides — shows what CMU expects students to know
+- Hamel Husain eval guides: https://hamel.dev/blog/posts/eval-tools/ and https://hamel.dev/blog/posts/evals-faq/
+- MTEB Leaderboard: https://huggingface.co/spaces/mteb/leaderboard — current embedding model rankings
 
 ---
 
@@ -541,4 +650,4 @@ https://www.anthropic.com/engineering — Read these as you reach the relevant p
 
 ---
 
-*Last updated: 2026-04-09*
+*Last updated: 2026-04-09 (enriched with 6-agent parallel research review)*

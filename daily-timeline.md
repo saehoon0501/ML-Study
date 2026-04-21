@@ -7,17 +7,30 @@
 Each day flows into the next. Watch sessions include note-taking.
 Code sessions mean hands-on implementation, not just reading.
 
+### End goal
+
+**Custom fine-tuned model → agentic app (LangGraph/LangChain) → shipped product**
+
+Every phase feeds this. The portfolio artifact IS the product MVP.
+
 ### What changed from v1
 
-Your LG CNS role already covers LangChain, LangGraph, RAG, FastAPI, production deployment.
-Studying those from scratch is wasted time. Instead:
+- **P1-P4 unchanged** — foundational depth to choose and customize the right model
+- **P5 (RAG) compressed 18 → 7 days** — theory gaps only, you build RAG daily at LG CNS
+- **P6 (Multimodal) compressed 10 → 7 days** — conditional, skip if product doesn't need it
+- **P7 (Evaluation) expanded 13 → 16 days** — evaluate YOUR model + agent system
+- **P8 (Production) compressed 14 → 5 days** — theory only, you deploy daily
+- **Portfolio Artifact (46 days)** — your product MVP, also serves as admissions portfolio
 
-- **P1-P4 unchanged** — foundational depth needed for master's interviews
-- **P5 (RAG) compressed from 18 → 7 days** — theory gaps only, skip LangChain basics
-- **P6 (Multimodal) compressed from 10 → 7 days**
-- **P7 (Evaluation) expanded from 13 → 16 days** — core skill + portfolio artifact foundation
-- **P8 (Production) compressed from 14 → 5 days** — theory only, you deploy daily
-- **Capstone replaced by Portfolio Artifact (46 days)** — open-source project for applications
+### v3 enrichment (6-agent research + web-verified corrections, Apr 2026)
+
+- **P1-P2:** Added Karpathy Video 5, modern arch components (RoPE, GQA, Flash Attention, RMSNorm, SwiGLU)
+- **P3:** Added MoE (DeepSeek-V3/R1), post-Chinchilla (Llama 3 inference-optimal), SGLang
+- **P4:** Unsloth default, DoRA > LoRA (r=16 + use_dora=True), ORPO/KTO, Argilla, mergekit. Models: **Qwen 3 8B** or **Llama 4 Scout**
+- **P5:** Updated embeddings (Gemini Embed, Qwen3-Embedding, Jina v5), GraphRAG/RAPTOR/Late Chunking/ColPali, ARES
+- **P6:** GLM-4.5V + Qwen2.5-VL-72B as current VLM leaders, document understanding (OCR-free), audio awareness
+- **P7:** Agent eval papers, Bloom (confirmed Dec 2025), Promptfoo, Hamel Husain guides, Braintrust ($80M raise), DeepEval
+- **P8:** FP8/AWQ-Marlin, SGLang 29% faster than vLLM on H100, MCP (97M downloads, Linux Foundation), LangGraph 1.0+, observability
 
 ### Hard deadlines driving this timeline
 
@@ -57,14 +70,14 @@ Jan 2027 ........ Cornell Tech, Duke AIPI, Northwestern deadlines
 | 11 | Apr 19 (Sun) | Karpathy backprop ninja (2/2) | Watch Video 4 second half. Complete manual gradient derivations. Understand why this matters for debugging |
 | 12 | Apr 20 (Mon) | PyTorch fundamentals (1/2) | PyTorch 60-min blitz: tensors, autograd. Compare with your micrograd |
 | 13 | Apr 21 (Tue) | PyTorch fundamentals (2/2) | `nn.Module`, dataloaders, training loop patterns. Rewrite makemore MLP in idiomatic PyTorch |
-| 14 | Apr 22 (Wed) | **Build:** char-level LM (1/3) | Start from blank file. Design architecture based on what you learned. Implement model class |
+| 14 | Apr 22 (Wed) | Karpathy GPT-2 reproduction | Watch Video 5 (condensed): real training pipeline, distributed training. **Critical** bridge P1→P2 |
 
 ### Week 3 (Apr 23 - Apr 24) — Phase 1 finish
 
 | Day | Date | Topic | What to do |
 |-----|------|-------|------------|
-| 15 | Apr 23 (Thu) | **Build:** char-level LM (2/3) | Implement training loop, loss tracking, learning rate schedule. Start training |
-| 16 | Apr 24 (Fri) | **Build:** char-level LM (3/3) | Debug, evaluate, generate samples. Experiment: what happens with different hidden sizes, learning rates? |
+| 15 | Apr 23 (Thu) | **Build:** char-level LM (1/2) | Start from blank file. Design architecture, implement model class, training loop, loss tracking |
+| 16 | Apr 24 (Fri) | **Build:** char-level LM (2/2) | Debug, evaluate, generate samples. Experiment: different hidden sizes, learning rates |
 
 **Checkpoint:** You can train a neural net from scratch, understand every gradient, and diagnose training issues.
 
@@ -98,9 +111,9 @@ Jan 2027 ........ Cornell Tech, Duke AIPI, Northwestern deadlines
 
 | Day | Date | Topic | What to do |
 |-----|------|-------|------------|
-| 29 | May 7 (Thu) | "Attention Is All You Need" paper (1/2) | Read Sections 1-3 of the paper. Map each concept to what you already built |
-| 30 | May 8 (Fri) | Paper + Annotated Transformer (1/2) | Read Sections 4-7 of paper. Start Harvard's Annotated Transformer side by side |
-| 31 | May 9 (Sat) | Annotated Transformer (2/2) | Finish Annotated Transformer. Compare their implementation with yours from Video 6 |
+| 29 | May 7 (Thu) | "Attention Is All You Need" paper | Read Sections 1-7. Map each concept to what you already built. Start Annotated Transformer |
+| 30 | May 8 (Fri) | Annotated Transformer | Finish Harvard's Annotated Transformer. Compare their implementation with yours from Video 6 |
+| 31 | May 9 (Sat) | Modern architecture components | RoPE, GQA/MLA, FlashAttention v4, RMSNorm, SwiGLU — how modern LLMs differ from the 2017 paper. Watch Umar Jamil's videos on these |
 | 32 | May 10 (Sun) | **Build:** GPT from scratch (1/4) | Start YOUR implementation. Not Karpathy's, not Harvard's — yours. Design the architecture |
 | 33 | May 11 (Mon) | **Build:** GPT (2/4) | Implement multi-head attention + positional encoding. Unit test attention outputs |
 | 34 | May 12 (Tue) | **Build:** GPT (3/4) | Implement transformer blocks, full model. Write training loop |
@@ -121,15 +134,15 @@ Jan 2027 ........ Cornell Tech, Duke AIPI, Northwestern deadlines
 | 38 | May 16 (Sat) | CS336 Lecture 1 | Tokenization: BPE variants, SentencePiece, how tokenizer choice affects downstream performance |
 | 39 | May 17 (Sun) | CS336 Lecture 3 | Architectures & Hyperparameters: RoPE, GQA, SwiGLU, RMSNorm — modern transformer choices |
 | 40 | May 18 (Mon) | CS336 Lecture 9 (1/2) | Scaling Laws part 1: Kaplan et al., power laws, compute-optimal training |
-| 41 | May 19 (Tue) | CS336 Lecture 9 (2/2) + Chinchilla | Finish scaling laws. Read Chinchilla paper (skim): key insight about data vs parameters |
-| 42 | May 20 (Wed) | CS336 Lecture 10 | Inference: KV cache mechanics, continuous batching, speculative decoding |
+| 41 | May 19 (Tue) | CS336 L9 (2/2) + Chinchilla + Llama 3 | Finish scaling laws. Chinchilla paper (skim) + Llama 3.1 report: post-Chinchilla "inference-optimal" training |
+| 42 | May 20 (Wed) | MoE + DeepSeek | Mixture of Experts: sparse routing, why MoE enables massive models cheaply. DeepSeek-V3/R1 reports: MLA, cost-efficient MoE, reasoning models |
 
 ### Week 7 (May 21 - May 25)
 
 | Day | Date | Topic | What to do |
 |-----|------|-------|------------|
-| 43 | May 21 (Thu) | CS336 Lecture 12 | Evaluation: benchmarks, contamination, how to measure model quality |
-| 44 | May 22 (Fri) | Inference optimization deep dive | Read vLLM PagedAttention blog post. Understand KV cache memory layout, why paging helps |
+| 43 | May 21 (Thu) | CS336 Lecture 10 + 12 | Inference (KV cache, batching, speculative decoding) + Evaluation (benchmarks, contamination) |
+| 44 | May 22 (Fri) | Inference optimization deep dive | Read vLLM PagedAttention blog. SGLang RadixAttention. Understand KV cache memory layout, why paging helps |
 | 45 | May 23 (Sat) | **Exercise:** memory calculations (1/2) | Calculate: 7B model memory footprint (FP16, INT8, INT4). KV cache size for different sequence lengths |
 | 46 | May 24 (Sun) | **Exercise:** memory calculations (2/2) | Calculate: throughput estimates for different batch sizes. Given a GPU (A100 80GB), what models fit? What's the max context? |
 | 47 | May 25 (Mon) | Review & consolidation | Review all Phase 3 notes. Create a personal "model evaluation cheat sheet" — what to check when a new model drops |
@@ -144,11 +157,11 @@ Jan 2027 ........ Cornell Tech, Duke AIPI, Northwestern deadlines
 
 | Day | Date | Topic | What to do |
 |-----|------|-------|------------|
-| 48 | May 26 (Tue) | LoRA paper (1/2) | Read LoRA paper Sections 1-4. Understand low-rank decomposition, why weight updates are low-rank |
-| 49 | May 27 (Wed) | LoRA paper (2/2) | Finish LoRA paper. Understand rank selection, which layers to apply LoRA to, ablation results |
-| 50 | May 28 (Thu) | QLoRA paper | Read QLoRA paper. Focus on: NF4 data type, double quantization, paged optimizers. Understand the engineering tricks |
-| 51 | May 29 (Fri) | Alignment landscape | Read about SFT, DPO, RLHF conceptually. CS336 alignment lecture or Chip Huyen's RLHF blog |
-| 52 | May 30 (Sat) | Alignment continued | DPO vs RLHF tradeoffs. When to use which. Read the DPO paper intro (Rafailov et al., 2023) |
+| 48 | May 26 (Tue) | LoRA paper | Read LoRA paper. Understand low-rank decomposition, rank selection, which layers to apply to |
+| 49 | May 27 (Wed) | DoRA + QLoRA papers | DoRA (weight-decomposed LoRA, 2024) — outperforms LoRA. QLoRA: NF4, double quantization, paged optimizers |
+| 50 | May 28 (Thu) | When to fine-tune | Decision framework: prompting > few-shot > RAG > fine-tuning. Read Hamel Husain's posts on this |
+| 51 | May 29 (Fri) | Alignment: SFT + DPO + ORPO | SFT fundamentals. DPO (practical default). ORPO/KTO (simpler alternatives). RLHF (conceptual only) |
+| 52 | May 30 (Sat) | Data curation for fine-tuning | Quality > quantity. Argilla for annotation. Deduplication (MinHash). Chat template formatting — the #1 silent failure |
 | 53 | May 31 (Sun) | HF LLM Course Ch 1-2 | Course overview, Transformer models: using pre-trained models, understanding the pipeline API |
 | 54 | Jun 1 (Mon) | HF LLM Course Ch 3-4 | Tokenizers deep dive (connects to Karpathy Video 7). Fine-tuning fundamentals |
 | 55 | Jun 2 (Tue) | HF LLM Course Ch 5-6 | Datasets library: loading, processing, streaming. Working with large datasets |
@@ -160,12 +173,12 @@ Jan 2027 ........ Cornell Tech, Duke AIPI, Northwestern deadlines
 |-----|------|-------|------------|
 | 57 | Jun 4 (Thu) | HF LLM Course Ch 11 | Supervised Fine-Tuning walkthrough. Understand SFTTrainer, data formatting, chat templates |
 | 58 | Jun 5 (Fri) | Phil Schmid guide | "How to Fine-Tune Open LLMs in 2025" — end-to-end practical guide with modern HF stack |
-| 59 | Jun 6 (Sat) | Libraries deep dive | Hands-on with `peft` (LoRA config), `trl` (SFTTrainer), `accelerate`. Run example scripts |
-| 60 | Jun 7 (Sun) | **Project:** dataset curation | Pick your task. Curate a custom dataset (not a canned one). Clean, format, split train/val/test |
-| 61 | Jun 8 (Mon) | **Project:** fine-tune attempt 1 | Fine-tune a 7B model (Llama 3 / Mistral / Qwen) with QLoRA, rank=4. Track loss, eval metrics |
-| 62 | Jun 9 (Tue) | **Project:** fine-tune attempt 2 | Change LoRA rank (16, 64). Compare results. Try different learning rates |
-| 63 | Jun 10 (Wed) | **Project:** analysis & push | Compare all runs. Analyze: what rank works best? Why? Push best model to HF Hub |
-| 64 | Jun 11 (Thu) | **Project:** wrap-up | Test inference on your fine-tuned model. Write up findings. Document the decision framework |
+| 59 | Jun 6 (Sat) | Libraries deep dive | Hands-on with `peft` (DoRA/LoRA config), `trl` (SFT/DPO trainers), **Unsloth** (default for QLoRA). Run examples |
+| 60 | Jun 7 (Sun) | **Project:** dataset curation | Pick your task. Curate with Argilla (not a canned dataset). Clean, format, split. Quality over quantity |
+| 61 | Jun 8 (Mon) | **Project:** fine-tune attempt 1 | Fine-tune **Qwen 3 8B** or **Llama 4 Scout** with Unsloth + QLoRA + DoRA, rank=16. Track loss, eval metrics |
+| 62 | Jun 9 (Tue) | **Project:** fine-tune attempt 2 | Change rank (16, 64). Try LoRA vs DoRA. Compare results. Try different learning rates |
+| 63 | Jun 10 (Wed) | **Project:** model merging + push | Best runs → experiment with mergekit (SLERP/TIES). Push best model to HF Hub |
+| 64 | Jun 11 (Thu) | **Project:** wrap-up | Test inference. Write up findings. Document decision framework: when fine-tuning vs RAG vs prompting |
 
 **Checkpoint:** You know when to fine-tune vs. prompt vs. RAG, and you've shipped a fine-tuned model to HF Hub.
 
@@ -179,11 +192,11 @@ You build RAG systems daily at LG CNS. This phase covers only what you likely ha
 
 | Day | Date | Topic | What to do |
 |-----|------|-------|------------|
-| 65 | Jun 12 (Fri) | Embedding models theory | How text → vectors works. Sentence-BERT, E5, BGE architectures. Contrastive learning (InfoNCE loss). Read: Anthropic "Introducing Contextual Retrieval" |
+| 65 | Jun 12 (Fri) | Embedding models theory | Foundations (S-BERT, E5, BGE) → current SOTA (Gemini Embed, Qwen3-Embedding, Jina v5). Check MTEB v2 leaderboard. Contrastive learning (InfoNCE). Read: Anthropic "Contextual Retrieval" |
 | 66 | Jun 13 (Sat) | Vector search internals | HNSW, IVF, Product Quantization — how they actually work. Recall vs latency vs memory tradeoffs. Reference: Pinecone FAISS tutorial |
-| 67 | Jun 14 (Sun) | Reranking deep dive | Cross-encoders vs bi-encoders: why cross-encoders are better but slower. ColBERT late interaction. When to rerank vs improve retrieval |
-| 68 | Jun 15 (Mon) | Advanced RAG patterns | HyDE, query decomposition, Self-RAG, Corrective RAG. Read: Anthropic "Building effective agents" blog |
-| 69 | Jun 16 (Tue) | RAG paper + evaluation | Skim original RAG paper (Lewis et al., 2020). Understand RAGAS metrics: faithfulness, relevance, recall. Set up `ragas` library |
+| 67 | Jun 14 (Sun) | Reranking deep dive | Cross-encoders vs bi-encoders, ColBERT late interaction. **ColPali**: vision-based doc retrieval bypassing OCR — bridges P5 and P6 |
+| 68 | Jun 15 (Mon) | Advanced RAG patterns | HyDE, Self-RAG, Corrective RAG, **GraphRAG** (Microsoft), **RAPTOR** (Stanford), **Late Chunking** (Jina). Agentic RAG theory |
+| 69 | Jun 16 (Tue) | RAG paper + evaluation | RAG paper (Lewis et al., 2020). RAGAS + **ARES** (automated RAG eval). Text-to-SQL as structured retrieval pattern |
 | 70 | Jun 17 (Wed) | Context engineering | Read: Anthropic "Effective context engineering for AI agents." Map to your LG CNS agent work — what would you change? |
 | 71 | Jun 18 (Thu) | RAG theory review | Synthesize: create a decision tree for "given X retrieval problem, use Y approach." Compare with your production experience at LG CNS |
 
@@ -198,11 +211,11 @@ You build RAG systems daily at LG CNS. This phase covers only what you likely ha
 | Day | Date | Topic | What to do |
 |-----|------|-------|------------|
 | 72 | Jun 19 (Fri) | Vision Transformers (ViT) | How transformers process images: patch embedding, 2D position encoding. Read ViT paper intro |
-| 73 | Jun 20 (Sat) | CLIP + VLMs | Contrastive language-image pretraining. LLaVA, Flamingo architecture patterns. How vision encoders connect to LLMs |
-| 74 | Jun 21 (Sun) | Structured data + LLMs | Table understanding, schema-aware prompting, Text-to-SQL. Connects to your PIM (SQL agent) work |
+| 73 | Jun 20 (Sat) | CLIP + VLMs | Contrastive pretraining. Historical: LLaVA, Flamingo. Current: **GLM-4.5V** (SOTA MoE), **Qwen2.5-VL-72B**, Molmo. How vision encoders connect to LLMs |
+| 74 | Jun 21 (Sun) | Document understanding | OCR-free models (GOT-OCR2.0, DocOwl 2). ColPali for vision-based retrieval. Audio awareness: Whisper v3, Qwen2-Audio |
 | 75 | Jun 22 (Mon) | HF multimodal pipelines | Hands-on: image captioning, visual QA, image-text matching, CLIP embeddings for retrieval |
 | 76 | Jun 23 (Tue) | **Project:** multimodal system (1/3) | Design: product image + description + attributes → categorization/matching system |
-| 77 | Jun 24 (Wed) | **Project:** multimodal (2/3) | Implement pipeline. Connect VLM + structured data integration |
+| 77 | Jun 24 (Wed) | **Project:** multimodal (2/3) | Implement pipeline. Connect VLM (GLM-4.5V or Qwen2.5-VL) + structured data integration |
 | 78 | Jun 25 (Thu) | **Project:** multimodal (3/3) | Evaluate accuracy, handle edge cases, document. Push to GitHub |
 
 **Checkpoint:** You can build systems that reason over images, text, and structured data together.
@@ -222,18 +235,18 @@ This is your highest-leverage phase for the master's application. Evaluation is:
 |-----|------|-------|------------|
 | 79 | Jun 26 (Fri) | LLM benchmarks overview | Read "Top LLM Benchmarks Explained" (Confident AI). Sebastian Raschka "4 Approaches to LLM Evaluation." MMLU, HumanEval, MATH, BBH — what each tests and its limitations |
 | 80 | Jun 27 (Sat) | Benchmarks deep dive | Explore HF Open LLM Leaderboard. LMSYS Chatbot Arena. Understand why Arena ELO is most trusted. What makes benchmarks saturate? |
-| 81 | Jun 28 (Sun) | Agent evaluation | Read: Anthropic "Demystifying evals for AI agents." Agent evals are harder than model evals — non-determinism, tool use, multi-step. Map to your LG CNS agent systems |
-| 82 | Jun 29 (Mon) | LLM-as-judge methodology | Using strong models to evaluate weaker ones. Calibration, bias, position effects. Read: Anthropic "Designing AI-resistant technical evaluations" |
-| 83 | Jun 30 (Tue) | Human evaluation design | Rubrics, inter-annotator agreement (Cohen's kappa), when human eval is necessary vs automated |
-| 84 | Jul 1 (Wed) | Eval tools: lm-evaluation-harness | Hands-on: EleutherAI's harness. Run a benchmark on a small model. Understand output format |
-| 85 | Jul 2 (Thu) | Eval tools: deepeval + ragas | Set up `deepeval` for custom evals. `ragas` for RAG evaluation. Build a simple eval pipeline |
+| 81 | Jun 28 (Sun) | Agent evaluation | Read: Anthropic "Demystifying evals for AI agents" + "Survey on Evaluation of LLM-based Agents" (2025). CLEAR framework (Cost/Latency/Efficacy/Assurance/Reliability) |
+| 82 | Jun 29 (Mon) | LLM-as-judge + red-teaming | LLM-as-judge: calibration, bias. Red-teaming: **Anthropic Bloom** (automated behavioral evals) + **Promptfoo** (adversarial prompts). Read: "Designing AI-resistant technical evaluations" |
+| 83 | Jun 30 (Tue) | Human eval + practitioner guides | Rubrics, inter-annotator agreement. Read: Hamel Husain "Selecting the Right AI Evals Tool" + "LLM Evals FAQ" |
+| 84 | Jul 1 (Wed) | Eval tools: lm-eval-harness + Braintrust | EleutherAI's harness (benchmarks). **Braintrust** (CI/CD eval gating). **Arize Phoenix** (open-source observability) |
+| 85 | Jul 2 (Thu) | Eval tools: deepeval + ragas | Set up `deepeval` for custom evals. `ragas` + ARES for RAG evaluation. Build a simple eval pipeline |
 
 ### Week 13 (Jul 3 - Jul 9)
 
 | Day | Date | Topic | What to do |
 |-----|------|-------|------------|
-| 86 | Jul 3 (Fri) | A/B testing fundamentals | Statistical significance, sample size calculation, guardrail metrics. How to design an online ML experiment |
-| 87 | Jul 4 (Sat) | Experimentation advanced | Offline policy evaluation for ranking/reco. Backtesting when online experiments aren't feasible |
+| 86 | Jul 3 (Fri) | A/B testing + continuous eval | Statistical significance, sample size, guardrail metrics. Production monitoring: drift detection (PSI, embedding drift), Evidently AI |
+| 87 | Jul 4 (Sat) | Experimentation advanced | Offline policy evaluation. Backtesting when online experiments aren't feasible. Cost-aware evaluation (CostBench) |
 | 88 | Jul 5 (Sun) | **Project:** eval framework (1/4) | Design evaluation framework for an agentic AI system (based on your LG CNS work). Define task taxonomy, metrics, test cases |
 | 89 | Jul 6 (Mon) | **Project:** eval framework (2/4) | Implement automated evaluation: task completion rate, tool use accuracy, reasoning chain quality |
 | 90 | Jul 7 (Tue) | **Project:** eval framework (3/4) | Add LLM-as-judge scoring. Compare with human annotations. Measure correlation |
@@ -259,44 +272,56 @@ You deploy AI systems daily at LG CNS. This phase covers only theory you haven't
 
 | Day | Date | Topic | What to do |
 |-----|------|-------|------------|
-| 95 | Jul 12 (Sun) | Quantization theory | GPTQ, AWQ, GGUF — how each works mathematically. Precision vs quality tradeoffs. When to use which |
-| 96 | Jul 13 (Mon) | Inference optimization theory | KV caching internals, continuous batching, speculative decoding, PagedAttention. Cost modeling: $/1M tokens |
-| 97 | Jul 14 (Tue) | MLOps theory | Model versioning, output quality drift detection, CI/CD for ML. Read: huyenchip.com/mlops |
-| 98 | Jul 15 (Wed) | Human-in-the-loop design | Confidence routing, feedback loops, active learning. Read: Anthropic "Effective harnesses for long-running agents" |
-| 99 | Jul 16 (Thu) | Production review | Synthesize: create a system design template for "given X AI feature, here's the production architecture." Connect to your LG CNS deployments |
+| 95 | Jul 12 (Sun) | Quantization theory | GPTQ, AWQ, GGUF, **FP8** (Hopper/Blackwell), AWQ-Marlin. GGUF for CPU/hybrid (llama.cpp/Ollama). Precision vs quality tradeoffs |
+| 96 | Jul 13 (Mon) | Inference + observability | Frameworks: **vLLM** (default), **SGLang** (shared-prefix), TensorRT-LLM (raw throughput). TGI → maintenance. Observability: Langfuse, LangSmith, Arize Phoenix |
+| 97 | Jul 14 (Tue) | MLOps + MCP | Model versioning, drift detection, CI/CD for ML. **MCP** (Model Context Protocol) — new interop standard for LLM tooling. Read: huyenchip.com/mlops |
+| 98 | Jul 15 (Wed) | Human-in-the-loop + LangGraph 1.0 | Confidence routing, feedback loops. LangGraph 1.0+: interrupt/resume for HITL, PostgresSaver. Read: Anthropic "Effective harnesses for long-running agents" |
+| 99 | Jul 16 (Thu) | Production review | Synthesize: system design template for "given X AI feature, here's the production architecture." Cost optimization: multi-tier model routing, semantic caching |
 
 **Checkpoint:** You can explain the theory behind the production systems you already build.
 
 ---
 
-## Portfolio Artifact: Open-Source Project (46 days)
+## Portfolio Artifact: Your Product MVP (46 days)
 
-**This replaces the old capstone.** This is the single most important deliverable for your master's applications.
+**This serves two purposes:**
+1. The #1 deliverable for your master's applications
+2. The first version of the product you want to build
 
-### What to build
+### The stack
 
-Choose one (decide on Day 92):
+```
+Custom fine-tuned model (from Phase 4)
+    ↓
+Agentic framework (LangGraph/LangChain — your existing expertise)
+    ↓
+RAG pipeline with optimized retrieval (Phase 5 theory applied)
+    ↓
+Evaluation proving it works (Phase 7 framework)
+    ↓
+Deployed product with API + demo
+```
 
-| Option | Description | Why it works |
-|--------|-------------|-------------|
-| **Agent Evaluation Harness** | Framework for evaluating agentic AI systems: task completion, tool use accuracy, reasoning quality, cost tracking | Combines your LG CNS agent experience + Phase 7 eval depth. No good open-source option exists. |
-| **RAG Quality Benchmark** | Standardized benchmark + evaluation suite for RAG systems across domains | Combines your production RAG experience + eval skills. Useful to the community. |
-| **Multi-Agent Coordination Library** | Patterns for multi-agent orchestration with evaluation built in | Extends your CaNiS work. Highly relevant to current industry needs. |
+### Product domain
+
+TBD — decide on Day 92 after completing the eval framework project.
+By then you'll have fine-tuned a model, deepened RAG theory, and built
+an eval framework. Enough signal to pick a domain.
 
 ### Phase A: Architecture & Core (Jul 17 - Jul 31, 15 days)
 
 | Day | Date | Topic | What to do |
 |-----|------|-------|------------|
-| 100 | Jul 17 (Fri) | Architecture design | Define the artifact's scope, API surface, core abstractions. Draw the system diagram |
+| 100 | Jul 17 (Fri) | Architecture design | Define product scope, model requirements, agent architecture, API surface. Draw the system diagram |
 | 101 | Jul 18 (Sat) | Project setup | GitHub repo, CI/CD, linting, testing framework, documentation structure |
-| 102 | Jul 19 (Sun) | Core module 1 | Implement the foundational data structures and interfaces |
-| 103 | Jul 20 (Mon) | Core module 2 | Implement the primary evaluation/orchestration logic |
-| 104 | Jul 21 (Tue) | Core module 3 | Implement integrations (LangChain, HF, API providers) |
-| 105 | Jul 22 (Wed) | Unit tests | Comprehensive test coverage for core modules |
-| 106 | Jul 23 (Thu) | Core module 4 | Metrics computation, scoring, reporting |
+| 102 | Jul 19 (Sun) | Model integration | Load your fine-tuned model (Phase 4). Build inference pipeline. Test baseline quality |
+| 103 | Jul 20 (Mon) | Agent pipeline | Build LangGraph/LangChain agent around your model. Tool definitions, state management |
+| 104 | Jul 21 (Tue) | RAG integration | Wire retrieval pipeline into agent. Apply Phase 5 theory: reranking, hybrid search |
+| 105 | Jul 22 (Wed) | Unit tests | Comprehensive test coverage for model, agent, and retrieval modules |
+| 106 | Jul 23 (Thu) | Evaluation integration | Wire Phase 7 eval framework into the product. Automated quality metrics |
 | 107 | Jul 24 (Fri) | Core review & refactor | Review all core code. Refactor for clarity. This is portfolio code — it must be clean |
-| 108 | Jul 25 (Sat) | Integration tests | End-to-end tests with real models |
-| 109 | Jul 26 (Sun) | CLI / API layer | User-facing interface: CLI commands or Python API |
+| 108 | Jul 25 (Sat) | Integration tests | End-to-end: input → agent → model → retrieval → output → eval |
+| 109 | Jul 26 (Sun) | API layer | FastAPI (your expertise) — user-facing API for the product |
 | 110 | Jul 27 (Mon) | Documentation (1/2) | README: installation, quickstart, architecture overview |
 | 111 | Jul 28 (Tue) | Documentation (2/2) | API reference, examples, contributing guide |
 | 112 | Jul 29 (Wed) | Bug fixes + edge cases | Run against diverse inputs. Fix failures. Harden |
@@ -325,15 +350,16 @@ Choose one (decide on Day 92):
 | 130 | Aug 16 (Sun) | SOP connection | Draft the paragraph in your SOP that references this artifact. How does it demonstrate your capability? |
 | 131 | Aug 17 (Mon) | v1.0 release | Final release. Artifact is portfolio-ready |
 
-### Phase C: Growth & Maintenance (Sep-Oct, outside daily timeline)
+### Phase C: Product Growth (Sep-Oct, outside daily timeline)
 
-After Aug 17, the artifact continues independently (no daily schedule needed):
+After Aug 17, the product continues independently (no daily schedule needed):
 
-- [ ] Share on relevant communities (HN, Reddit, Twitter/X, Discord)
-- [ ] Respond to issues and PRs
-- [ ] Add features based on community feedback
-- [ ] Track stars/forks/usage for resume quantification
-- [ ] **October 2026:** Artifact is mature. Reference in all applications
+- [ ] Get real users — share on relevant communities, get feedback
+- [ ] Iterate based on user feedback (not hypothetical features)
+- [ ] Track usage metrics for resume quantification
+- [ ] Explore monetization or market fit signals
+- [ ] **October 2026:** Product is mature enough to reference in all applications
+- [ ] Continue developing toward a real product beyond admissions
 
 ---
 
