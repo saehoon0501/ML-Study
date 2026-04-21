@@ -180,52 +180,39 @@ and explain the tradeoffs to a non-ML engineer.
 
 ---
 
-## Phase 5: RAG & Retrieval Systems (2.5 weeks)
+## Phase 5: RAG & Retrieval — Theory Gaps Only (1 week)
 
-The most production-critical AI pattern right now. This is where your
-software engineering background shines — RAG is fundamentally a
-systems design problem informed by ML understanding.
+You build RAG systems daily at LG CNS with LangChain/LangGraph.
+This phase fills the theoretical gaps behind what you already do in production.
 
-### Theory Track
+### Theory Track (focus area)
 
 - [ ] Embedding models — how text becomes vectors
     - Sentence-BERT, E5, BGE model families
-    - Understand: contrastive learning, cosine similarity, embedding dimensions
+    - Understand: contrastive learning (InfoNCE loss), cosine similarity, embedding dimensions
     - Why some queries "miss" relevant documents (semantic gap)
-- [ ] Vector search fundamentals
-    - ANN algorithms: HNSW, IVF, Product Quantization
+- [ ] Vector search internals
+    - ANN algorithms: HNSW, IVF, Product Quantization — how they actually work
     - Tradeoff: recall vs. latency vs. memory
-- [ ] Retrieval strategies
-    - Dense retrieval vs. sparse (BM25) vs. hybrid
-    - Reranking: cross-encoders vs. bi-encoders
-    - Chunking strategies: fixed-size, semantic, recursive
+- [ ] Reranking deep dive
+    - Cross-encoders vs. bi-encoders: why cross-encoders are better but slower
+    - ColBERT late interaction pattern
 - [ ] **Paper (skim):** "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks" (Lewis et al., 2020)
-- [ ] Advanced RAG patterns
-    - Query decomposition, HyDE (Hypothetical Document Embeddings)
-    - Self-RAG, Corrective RAG
-    - Multi-step reasoning with retrieval
+- [ ] Advanced RAG patterns you may not have used
+    - HyDE (Hypothetical Document Embeddings), Self-RAG, Corrective RAG
+- [ ] Context engineering for agents
+    - Read: Anthropic "Effective context engineering for AI agents"
 
-### Systems Track
+### Skipped (you already know this)
 
-- [ ] Vector databases: hands-on with at least two
-    - FAISS (local, fast prototyping)
-    - Chroma, Pinecone, Weaviate, or Qdrant (production-grade)
-- [ ] LangChain / LangGraph fundamentals
-    - Chains, agents, tool use, structured outputs
-    - Memory and conversation management
-    - LangGraph for complex multi-step workflows
-- [ ] DeepLearning.AI short courses:
-    - "LangChain for LLM Application Development"
-    - "Building and Evaluating Advanced RAG"
-- [ ] **Project: Build a production-grade RAG system**
-    - Domain: product catalog or documentation (relevant to commerce)
-    - Implement: ingestion pipeline → chunking → embedding → vector store → retrieval → reranking → generation
-    - Add: hybrid search (dense + BM25), metadata filtering
-    - Evaluate: retrieval recall, answer faithfulness, latency
+- ~~LangChain / LangGraph fundamentals~~ — daily work
+- ~~Vector database hands-on~~ — daily work
+- ~~Build a RAG system project~~ — you've built many
+- ~~DeepLearning.AI LangChain course~~ — below your level
 
-**You're done when:** You can diagnose why a RAG system is returning
-bad answers — is it a chunking problem? embedding model mismatch?
-retrieval recall issue? generation hallucination? — and fix each one.
+**You're done when:** You can explain the THEORY behind the RAG systems you
+already build — why HNSW works, why cross-encoders beat bi-encoders,
+what contrastive learning does. Not just "it works" but "here's why."
 
 ---
 
@@ -313,70 +300,66 @@ rigor, and make a go/no-go recommendation with evidence.
 
 ---
 
-## Phase 8: Production Systems & Deployment (2 weeks)
+## Phase 8: Production Theory (1 week)
 
-Where your software engineering background becomes your superpower.
-Most ML engineers can train a model. Few can deploy one reliably.
+You deploy AI systems daily at LG CNS. This phase covers only the
+theory you haven't formalized — no hands-on deployment projects.
 
-### Theory Track
+### Theory Track (focus area)
 
-- [ ] Quantization deep dive
-    - GPTQ, AWQ, GGUF — how each works, precision tradeoffs
-    - When to use: GGUF for CPU/edge, GPTQ/AWQ for GPU serving
-- [ ] Inference optimization
-    - KV caching, continuous batching, speculative decoding
-    - Throughput vs. latency tradeoffs
+- [ ] Quantization theory
+    - GPTQ, AWQ, GGUF — how each works mathematically
+    - Precision vs. quality tradeoffs, when to use which
+- [ ] Inference optimization theory
+    - KV caching internals, continuous batching, speculative decoding, PagedAttention
     - Cost modeling: $/1M tokens for different setups
-
-### Systems Track
-
-- [ ] Inference frameworks — hands-on with each:
-    - `vLLM` — high-throughput GPU serving (PagedAttention)
-    - `llama.cpp` / `ollama` — local CPU/GPU inference
-    - `text-generation-inference` (TGI) — HF's production server
-- [ ] MLOps fundamentals
-    - Model versioning and registry (HF Hub, MLflow)
-    - Monitoring: latency, error rates, output quality drift
-    - Prompt versioning and management
+- [ ] MLOps theory
+    - Model versioning, output quality drift detection
     - CI/CD for ML: testing model outputs, regression detection
-- [ ] Human-in-the-loop system design
-    - When to route to humans (confidence thresholds, edge cases)
-    - Feedback loops: human corrections → retraining data
-    - Active learning: prioritize what humans review
-- [ ] **Project: Deploy an end-to-end AI service**
-    - Take your fine-tuned model OR RAG pipeline from earlier phases
-    - Quantize and serve with vLLM or TGI
-    - Build API layer with proper error handling and monitoring
-    - Add human-in-the-loop fallback for low-confidence outputs
-    - Instrument with logging for evaluation data collection
+    - Read: huyenchip.com/mlops
+- [ ] Human-in-the-loop design patterns
+    - Confidence routing, feedback loops, active learning
+    - Read: Anthropic "Effective harnesses for long-running agents"
 
-**You're done when:** You can take a model from HF Hub → quantize → serve
-behind an API → monitor in production → collect feedback → improve.
-The full loop.
+### Skipped (you already do this)
+
+- ~~Inference frameworks hands-on~~ — you deploy with these
+- ~~Deploy an end-to-end service project~~ — this is your day job
+- ~~MLOps hands-on (MLflow, Docker)~~ — you know this
+
+**You're done when:** You can explain the theory behind your production
+systems — why PagedAttention helps, how drift detection works,
+when to route to humans. Interview-ready depth.
 
 ---
 
-## Capstone: Integration Project (1-2 weeks)
+## Portfolio Artifact: Open-Source Project (5-6 weeks)
 
-Build something that ties it all together. Ideally, something relevant
-to the commerce domain (Toss JD alignment).
+**This is the #1 deliverable for your master's applications.**
+Ships as v1.0 by end of August. Continues growing through October.
 
-### Suggested project: Commerce AI System
+### Artifact options (choose one)
 
-- [ ] **Product catalog intelligence pipeline**
-    - Multimodal input: product images + descriptions + structured specs
-    - RAG over product catalog for search/recommendation
-    - Fine-tuned classifier for category/quality assessment
-    - Human-in-the-loop for edge cases
-    - Evaluation framework with offline metrics
-    - Deployed as an API with monitoring
+| Option | Description | Why it works |
+|--------|-------------|-------------|
+| **Agent Evaluation Harness** | Framework for evaluating agentic AI systems | Combines LG CNS agent experience + Phase 7 eval depth |
+| **RAG Quality Benchmark** | Standardized benchmark + eval suite for RAG | Combines production RAG experience + eval skills |
+| **Multi-Agent Coordination Library** | Orchestration patterns with built-in evaluation | Extends your CaNiS work |
 
-This single project demonstrates every skill in the JD:
-- "텍스트, 이미지, 구조화된 데이터를 유기적으로 활용" ✓
-- "LLM, RAG, 멀티모달 모델 활용" ✓
-- "Human-in-the-loop 운영가능한 시스템 설계" ✓
-- "오프라인/온라인 실험과 정량 평가" ✓
-- "비즈니스 적용 가능성과 지속 가능성" ✓
+### What makes it portfolio-worthy
+
+- Clean, well-documented code (admissions committees will read it)
+- Real evaluation results on real problems
+- Working demo (Gradio/Streamlit)
+- Solves a genuine gap in the ecosystem (not a tutorial project)
+- Connects directly to SOP narrative: "I built X at LG CNS, discovered gap Y,
+  and created Z to address it"
+
+### Structure
+
+- **Phase A (2 weeks):** Architecture, core modules, tests, v0.1
+- **Phase B (2.5 weeks):** Advanced features, case study, documentation, demo, v1.0
+- **Phase C (Sep-Oct):** Community sharing, iteration, growth
 
 ---
 
@@ -531,30 +514,30 @@ https://www.anthropic.com/engineering — Read these as you reach the relevant p
 
 | Phase | Topic | Weeks | Status |
 | --- | --- | --- | --- |
-| 1 | Neural Network Foundations | 2 | Not started |
-| 2 | Transformers Architecture | 2.5 | Not started |
-| 3 | LLMs at Scale | 2 | Not started |
-| 4 | Fine-Tuning | 2.5 | Not started |
-| 5 | RAG & Retrieval | 2.5 | Not started |
-| 6 | Multimodal AI | 1.5 | Not started |
-| 7 | Evaluation & Experimentation | 2 | Not started |
-| 8 | Production & Deployment | 2 | Not started |
-| C | Capstone Project | 1-2 | Not started |
-| | **Total** | **~18** | |
+| 1 | Neural Network Foundations | 2.3 | In progress |
+| 2 | Transformers Architecture | 2.7 | Not started |
+| 3 | LLMs at Scale | 1.7 | Not started |
+| 4 | Fine-Tuning | 2.4 | Not started |
+| 5 | RAG Theory Gaps | 1 | Not started |
+| 6 | Multimodal AI | 1 | Not started |
+| 7 | Evaluation & Experimentation | 2.3 | Not started |
+| 8 | Production Theory | 0.7 | Not started |
+| P | Portfolio Artifact | 4.6 | Not started |
+| | **Total** | **~19** | |
 
 ---
 
-## How This Maps to the Toss Commerce AI Team JD
+## How This Maps to Master's Applications
 
-| JD Requirement | Covered In |
+| Application Component | Covered By |
 | --- | --- |
-| LLM, RAG, 멀티모달 모델 활용 | Phases 2-6 |
-| 텍스트, 이미지, 구조화된 데이터 통합 | Phase 6 + Capstone |
-| 문제 정의 → 모델 설계 → 실험 → 정량 평가 | Phase 7 |
-| PyTorch, HF Transformers, LangChain | Phases 1-5 |
-| Human-in-the-loop 운영가능한 시스템 | Phase 8 |
-| 오프라인/온라인 실험과 정량 평가 | Phase 7 |
-| 비즈니스 적용 + 지속 가능성 고려 | Phase 8 + Capstone |
+| Interview: "Explain attention/transformers" | Phase 2 (whiteboard-ready) |
+| Interview: "Explain scaling laws" | Phase 3 (Chinchilla, compute-optimal) |
+| Interview: "Walk me through fine-tuning" | Phase 4 (LoRA/QLoRA theory + hands-on) |
+| Interview: "How do you evaluate AI systems?" | Phase 7 (deepest phase) |
+| Resume: Open-source project | Portfolio artifact |
+| SOP: Technical depth + impact | Artifact + LG CNS work + eval expertise |
+| Differentiator vs other applicants | Production agent exp + eval framework |
 
 ---
 

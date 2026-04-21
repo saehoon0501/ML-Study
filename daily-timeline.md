@@ -1,15 +1,39 @@
-# Daily Study Timeline — 2hrs/day
+# Daily Study Timeline — 2hrs/day (Revised for Master's Application)
 
-**Start:** 2026-04-09 (Thu) | **End:** ~2026-08-17 (Mon)
+**Start:** 2026-04-09 (Thu) | **End:** ~2026-08-31 (Mon)
 **Pace:** 2 hours every day, 7 days/week
-**Total:** ~131 days (~19 weeks)
+**Total:** ~145 days (~21 weeks)
 
 Each day flows into the next. Watch sessions include note-taking.
 Code sessions mean hands-on implementation, not just reading.
 
+### What changed from v1
+
+Your LG CNS role already covers LangChain, LangGraph, RAG, FastAPI, production deployment.
+Studying those from scratch is wasted time. Instead:
+
+- **P1-P4 unchanged** — foundational depth needed for master's interviews
+- **P5 (RAG) compressed from 18 → 7 days** — theory gaps only, skip LangChain basics
+- **P6 (Multimodal) compressed from 10 → 7 days**
+- **P7 (Evaluation) expanded from 13 → 16 days** — core skill + portfolio artifact foundation
+- **P8 (Production) compressed from 14 → 5 days** — theory only, you deploy daily
+- **Capstone replaced by Portfolio Artifact (46 days)** — open-source project for applications
+
+### Hard deadlines driving this timeline
+
+```
+Jun-Jul 2026 .... TOEFL retake (2 attempts)
+Aug-Sep 2026 .... GRE prep + take (CMU MSAII only)
+Oct 2026 ........ Portfolio artifact shipped
+Nov 2026 ........ SOP drafting
+Dec 10, 2026 .... CMU MSAII deadline
+Dec 15, 2026 .... USC MSCS deadline
+Jan 2027 ........ Cornell Tech, Duke AIPI, Northwestern deadlines
+```
+
 ---
 
-## Phase 1: Neural Network Foundations
+## Phase 1: Neural Network Foundations (unchanged)
 
 ### Week 1 (Apr 9 - Apr 15)
 
@@ -35,7 +59,7 @@ Code sessions mean hands-on implementation, not just reading.
 | 13 | Apr 21 (Tue) | PyTorch fundamentals (2/2) | `nn.Module`, dataloaders, training loop patterns. Rewrite makemore MLP in idiomatic PyTorch |
 | 14 | Apr 22 (Wed) | **Build:** char-level LM (1/3) | Start from blank file. Design architecture based on what you learned. Implement model class |
 
-### Week 3 (Apr 23 - Apr 26) — Phase 1 finish
+### Week 3 (Apr 23 - Apr 24) — Phase 1 finish
 
 | Day | Date | Topic | What to do |
 |-----|------|-------|------------|
@@ -46,7 +70,7 @@ Code sessions mean hands-on implementation, not just reading.
 
 ---
 
-## Phase 2: Transformers — Architecture & Intuition
+## Phase 2: Transformers — Architecture & Intuition (unchanged)
 
 ### Week 3 cont'd (Apr 25 - Apr 29)
 
@@ -86,7 +110,7 @@ Code sessions mean hands-on implementation, not just reading.
 
 ---
 
-## Phase 3: How LLMs Actually Work at Scale
+## Phase 3: How LLMs Actually Work at Scale (unchanged)
 
 ### Week 6 (May 14 - May 20)
 
@@ -100,7 +124,7 @@ Code sessions mean hands-on implementation, not just reading.
 | 41 | May 19 (Tue) | CS336 Lecture 9 (2/2) + Chinchilla | Finish scaling laws. Read Chinchilla paper (skim): key insight about data vs parameters |
 | 42 | May 20 (Wed) | CS336 Lecture 10 | Inference: KV cache mechanics, continuous batching, speculative decoding |
 
-### Week 7 (May 21 - May 27)
+### Week 7 (May 21 - May 25)
 
 | Day | Date | Topic | What to do |
 |-----|------|-------|------------|
@@ -110,13 +134,11 @@ Code sessions mean hands-on implementation, not just reading.
 | 46 | May 24 (Sun) | **Exercise:** memory calculations (2/2) | Calculate: throughput estimates for different batch sizes. Given a GPU (A100 80GB), what models fit? What's the max context? |
 | 47 | May 25 (Mon) | Review & consolidation | Review all Phase 3 notes. Create a personal "model evaluation cheat sheet" — what to check when a new model drops |
 
-> **Enrichment for Phase 3:** If you want more depth on inference systems, read the vLLM paper (Kwon et al., 2023) and Anthropic's blog on "Effective harnesses for long-running agents."
-
 **Checkpoint:** You can estimate memory/throughput for any model, explain scaling laws, and evaluate new model releases critically.
 
 ---
 
-## Phase 4: Fine-Tuning — Theory & Practice
+## Phase 4: Fine-Tuning — Theory & Practice (unchanged)
 
 ### Week 7 cont'd + Week 8 (May 26 - Jun 3)
 
@@ -132,7 +154,7 @@ Code sessions mean hands-on implementation, not just reading.
 | 55 | Jun 2 (Tue) | HF LLM Course Ch 5-6 | Datasets library: loading, processing, streaming. Working with large datasets |
 | 56 | Jun 3 (Wed) | HF LLM Course Ch 7 | Main NLP tasks: classification, NER, QA. Using `pipeline()` for inference |
 
-### Week 9 (Jun 4 - Jun 10)
+### Week 9 (Jun 4 - Jun 11)
 
 | Day | Date | Topic | What to do |
 |-----|------|-------|------------|
@@ -145,157 +167,173 @@ Code sessions mean hands-on implementation, not just reading.
 | 63 | Jun 10 (Wed) | **Project:** analysis & push | Compare all runs. Analyze: what rank works best? Why? Push best model to HF Hub |
 | 64 | Jun 11 (Thu) | **Project:** wrap-up | Test inference on your fine-tuned model. Write up findings. Document the decision framework |
 
-> **Enrichment for Phase 4:** DL.AI "Fine-tuning and Reinforcement Learning for LLMs" short course. Also read Sebastian Raschka's LoRA variants guide if you want to explore DoRA, rsLoRA.
-
 **Checkpoint:** You know when to fine-tune vs. prompt vs. RAG, and you've shipped a fine-tuned model to HF Hub.
 
 ---
 
-## Phase 5: RAG & Retrieval Systems
+## Phase 5: RAG & Retrieval — Theory Gaps Only (compressed: 18 → 7 days)
+
+You build RAG systems daily at LG CNS. This phase covers only what you likely haven't formalized: embedding theory, ANN algorithm internals, reranking math, and advanced patterns.
 
 ### Week 10 (Jun 12 - Jun 18)
 
 | Day | Date | Topic | What to do |
 |-----|------|-------|------------|
-| 65 | Jun 12 (Fri) | Embedding models theory | How text → vectors works. Sentence-BERT, E5, BGE architectures. Contrastive learning intuition. Read: Anthropic "Introducing Contextual Retrieval" blog |
-| 66 | Jun 13 (Sat) | Embeddings hands-on | Generate embeddings with `sentence-transformers`. Visualize with t-SNE/UMAP. Test cosine similarity on real queries |
-| 67 | Jun 14 (Sun) | Vector search fundamentals | HNSW, IVF algorithms. Understand recall vs latency vs memory tradeoffs. Reference: Pinecone Learning Center FAISS tutorial |
-| 68 | Jun 15 (Mon) | Retrieval strategies | Dense vs sparse (BM25) vs hybrid. Cross-encoder reranking vs bi-encoder. When each wins |
-| 69 | Jun 16 (Tue) | Chunking strategies | Fixed-size, semantic, recursive chunking. How chunk size affects retrieval quality. Experiment with different strategies |
-| 70 | Jun 17 (Wed) | RAG paper + advanced patterns (1/2) | Skim original RAG paper (Lewis et al., 2020). Then: HyDE, query decomposition |
-| 71 | Jun 18 (Thu) | Advanced RAG (2/2) | Self-RAG, Corrective RAG, multi-step retrieval. When simple RAG isn't enough |
+| 65 | Jun 12 (Fri) | Embedding models theory | How text → vectors works. Sentence-BERT, E5, BGE architectures. Contrastive learning (InfoNCE loss). Read: Anthropic "Introducing Contextual Retrieval" |
+| 66 | Jun 13 (Sat) | Vector search internals | HNSW, IVF, Product Quantization — how they actually work. Recall vs latency vs memory tradeoffs. Reference: Pinecone FAISS tutorial |
+| 67 | Jun 14 (Sun) | Reranking deep dive | Cross-encoders vs bi-encoders: why cross-encoders are better but slower. ColBERT late interaction. When to rerank vs improve retrieval |
+| 68 | Jun 15 (Mon) | Advanced RAG patterns | HyDE, query decomposition, Self-RAG, Corrective RAG. Read: Anthropic "Building effective agents" blog |
+| 69 | Jun 16 (Tue) | RAG paper + evaluation | Skim original RAG paper (Lewis et al., 2020). Understand RAGAS metrics: faithfulness, relevance, recall. Set up `ragas` library |
+| 70 | Jun 17 (Wed) | Context engineering | Read: Anthropic "Effective context engineering for AI agents." Map to your LG CNS agent work — what would you change? |
+| 71 | Jun 18 (Thu) | RAG theory review | Synthesize: create a decision tree for "given X retrieval problem, use Y approach." Compare with your production experience at LG CNS |
+
+**Checkpoint:** You understand the theory behind the RAG systems you already build. You can explain WHY your production choices work, not just THAT they work.
+
+---
+
+## Phase 6: Multimodal AI (compressed: 10 → 7 days)
 
 ### Week 11 (Jun 19 - Jun 25)
 
 | Day | Date | Topic | What to do |
 |-----|------|-------|------------|
-| 72 | Jun 19 (Fri) | Vector DBs: FAISS | Hands-on with FAISS. Build an index, add vectors, search. Understand index types (Flat, IVF, HNSW) |
-| 73 | Jun 20 (Sat) | Vector DBs: production-grade | Hands-on with Chroma or Qdrant. Compare API, persistence, metadata filtering with FAISS |
-| 74 | Jun 21 (Sun) | LangChain fundamentals (1/3) | Chains, prompts, output parsers. Build a simple chain. Pre-read: Prompt Engineering Guide (promptingguide.ai) CoT & ReAct sections |
-| 75 | Jun 22 (Mon) | LangChain (2/3) | Agents, tool use, structured outputs. Read: Anthropic "Building effective agents" blog + "Writing effective tools for agents" |
-| 76 | Jun 23 (Tue) | LangGraph | Multi-step workflows, state machines. Build a simple agent graph. Read: Anthropic "The think tool" blog |
-| 77 | Jun 24 (Wed) | DL.AI: LangChain course | "LangChain for LLM Application Development" — work through the full short course |
-| 78 | Jun 25 (Thu) | DL.AI: Advanced RAG | "Building and Evaluating Advanced RAG" — work through the full short course |
-
-### Week 12 (Jun 26 - Jul 2)
-
-| Day | Date | Topic | What to do |
-|-----|------|-------|------------|
-| 79 | Jun 26 (Fri) | **Project:** RAG system (1/4) | Design architecture. Set up ingestion pipeline: document loading → chunking → embedding |
-| 80 | Jun 27 (Sat) | **Project:** RAG (2/4) | Build retrieval layer: vector store + BM25 hybrid search + metadata filtering |
-| 81 | Jun 28 (Sun) | **Project:** RAG (3/4) | Add reranking (cross-encoder). Wire up generation with retrieved context. Test end-to-end |
-| 82 | Jun 29 (Mon) | **Project:** RAG (4/4) | Evaluate: retrieval recall, answer faithfulness, latency. Fix the weakest link. Document |
-
-> **Enrichment for Phase 5:** (1) DL.AI "Building Multimodal Search and RAG" — bridges into Phase 6. (2) DL.AI "Multi AI Agent Systems with crewAI" — multi-agent patterns. (3) DL.AI "Agentic AI" by Andrew Ng. (4) UC Berkeley LLM Agents MOOC (llmagents-learning.org/f24) — watch selected lectures on ReAct and compound AI systems. (5) Claude Cookbooks (github.com/anthropics/claude-cookbooks) — try the RAG and agent notebooks. (6) Anthropic "Effective context engineering for AI agents" blog. (7) LlamaIndex resources (developers.llamaindex.ai) for alternative RAG perspectives.
-
-**Checkpoint:** You can build, diagnose, and fix a production-grade RAG system. You know why retrieval fails and how to fix it.
-
----
-
-## Phase 6: Multimodal AI
-
-### Week 12 cont'd + Week 13 (Jun 30 - Jul 9)
-
-| Day | Date | Topic | What to do |
-|-----|------|-------|------------|
-| 83 | Jun 30 (Tue) | Vision Transformers (ViT) | How transformers process images: patch embedding, 2D position encoding. Read ViT paper intro. Reference: rohitbandaru.github.io/blog/Vision-Language-Models |
-| 84 | Jul 1 (Wed) | CLIP | Contrastive language-image pretraining. How CLIP connects vision and text. Play with OpenCLIP |
-| 85 | Jul 2 (Thu) | Vision-Language Models | LLaVA, Flamingo architecture patterns. How vision encoders connect to LLMs |
-| 86 | Jul 3 (Fri) | VLMs continued + Structured data | Contrastive vs generative multimodal training. Table understanding, schema-aware prompting, Text-to-SQL basics |
-| 87 | Jul 4 (Sat) | HF multimodal pipelines | Hands-on: image captioning, visual QA, image-text matching using `transformers` |
-| 88 | Jul 5 (Sun) | CLIP embeddings hands-on | Build an image-text retrieval system using CLIP embeddings. Search product images by text query |
-| 89 | Jul 6 (Mon) | **Project:** multimodal system (1/4) | Design: product image + description + attributes → categorization system |
-| 90 | Jul 7 (Tue) | **Project:** multimodal (2/4) | Implement image processing pipeline. Connect VLM (LLaVA or similar) for image understanding |
-| 91 | Jul 8 (Wed) | **Project:** multimodal (3/4) | Integrate structured data. Build the full classification/matching pipeline |
-| 92 | Jul 9 (Thu) | **Project:** multimodal (4/4) | Test on real product data. Evaluate accuracy. Handle edge cases. Document findings |
-
-> **Enrichment for Phase 6:** (1) DL.AI "Multi-Vector Image Retrieval" — fine-grained image-text matching. (2) BentoML Multimodal AI Guide — practical model selection for 2026. (3) DL.AI "Building Multimodal Search and RAG" if not done in Phase 5.
+| 72 | Jun 19 (Fri) | Vision Transformers (ViT) | How transformers process images: patch embedding, 2D position encoding. Read ViT paper intro |
+| 73 | Jun 20 (Sat) | CLIP + VLMs | Contrastive language-image pretraining. LLaVA, Flamingo architecture patterns. How vision encoders connect to LLMs |
+| 74 | Jun 21 (Sun) | Structured data + LLMs | Table understanding, schema-aware prompting, Text-to-SQL. Connects to your PIM (SQL agent) work |
+| 75 | Jun 22 (Mon) | HF multimodal pipelines | Hands-on: image captioning, visual QA, image-text matching, CLIP embeddings for retrieval |
+| 76 | Jun 23 (Tue) | **Project:** multimodal system (1/3) | Design: product image + description + attributes → categorization/matching system |
+| 77 | Jun 24 (Wed) | **Project:** multimodal (2/3) | Implement pipeline. Connect VLM + structured data integration |
+| 78 | Jun 25 (Thu) | **Project:** multimodal (3/3) | Evaluate accuracy, handle edge cases, document. Push to GitHub |
 
 **Checkpoint:** You can build systems that reason over images, text, and structured data together.
 
 ---
 
-## Phase 7: Evaluation & Experimentation
+## Phase 7: Evaluation & Experimentation (expanded: 13 → 16 days)
 
-### Week 14 (Jul 10 - Jul 16)
+This is your highest-leverage phase for the master's application. Evaluation is:
+- The skill most AI engineers lack
+- The foundation for your portfolio artifact
+- What CMU MSAII and Cornell Tech will probe in interviews
 
-| Day | Date | Topic | What to do |
-|-----|------|-------|------------|
-| 93 | Jul 10 (Fri) | LLM benchmarks overview | Read "Top LLM Benchmarks Explained" (Confident AI). Read Sebastian Raschka "4 Approaches to LLM Evaluation." MMLU, HumanEval, MATH, BBH — what each tests |
-| 94 | Jul 11 (Sat) | Benchmarks continued | Explore HF Open LLM Leaderboard. Understand Leaderboard v2 metrics. What makes a good benchmark? Limitations? |
-| 95 | Jul 12 (Sun) | Evaluation methodology (1/2) | Offline eval: held-out test sets, cross-validation for LLMs. LLM-as-judge: using strong models to eval weak ones. Read: Anthropic "Demystifying evals for AI agents" blog |
-| 96 | Jul 13 (Mon) | Evaluation methodology (2/2) | Human evaluation design: rubrics, inter-annotator agreement. When human eval is necessary vs automated |
-| 97 | Jul 14 (Tue) | A/B testing fundamentals | Statistical significance, sample size calculation, guardrail metrics. How to design an online experiment |
-| 98 | Jul 15 (Wed) | Experimentation advanced | Offline policy evaluation for ranking/reco. Backtesting when online experiments aren't feasible |
-| 99 | Jul 16 (Thu) | Eval tools: lm-evaluation-harness | Hands-on: install EleutherAI's harness. Run a benchmark on a small model. Understand the output |
-
-### Week 15 (Jul 17 - Jul 23)
+### Week 12 (Jun 26 - Jul 2)
 
 | Day | Date | Topic | What to do |
 |-----|------|-------|------------|
-| 100 | Jul 17 (Fri) | Eval tools: deepeval + ragas | Set up `deepeval` for custom evals. Set up `ragas` for RAG evaluation (faithfulness, relevance, recall) |
-| 101 | Jul 18 (Sat) | **Project:** eval pipeline (1/4) | Design evaluation framework for your Phase 5 RAG system. Define metrics, build test dataset with ground truth |
-| 102 | Jul 19 (Sun) | **Project:** eval pipeline (2/4) | Implement automated evaluation: retrieval recall, answer correctness, faithfulness scores |
-| 103 | Jul 20 (Mon) | **Project:** eval pipeline (3/4) | Run comparative experiments: different chunking strategies, different embedding models, different retrieval methods |
-| 104 | Jul 21 (Tue) | **Project:** eval pipeline (4/4) | Analyze results. Build a decision framework (not just numbers). Document: "Given X constraints, use Y approach because Z" |
-| 105 | Jul 22 (Wed) | Review & consolidation | Review all Phase 7 material. Create your personal eval playbook: how to evaluate any new AI feature |
+| 79 | Jun 26 (Fri) | LLM benchmarks overview | Read "Top LLM Benchmarks Explained" (Confident AI). Sebastian Raschka "4 Approaches to LLM Evaluation." MMLU, HumanEval, MATH, BBH — what each tests and its limitations |
+| 80 | Jun 27 (Sat) | Benchmarks deep dive | Explore HF Open LLM Leaderboard. LMSYS Chatbot Arena. Understand why Arena ELO is most trusted. What makes benchmarks saturate? |
+| 81 | Jun 28 (Sun) | Agent evaluation | Read: Anthropic "Demystifying evals for AI agents." Agent evals are harder than model evals — non-determinism, tool use, multi-step. Map to your LG CNS agent systems |
+| 82 | Jun 29 (Mon) | LLM-as-judge methodology | Using strong models to evaluate weaker ones. Calibration, bias, position effects. Read: Anthropic "Designing AI-resistant technical evaluations" |
+| 83 | Jun 30 (Tue) | Human evaluation design | Rubrics, inter-annotator agreement (Cohen's kappa), when human eval is necessary vs automated |
+| 84 | Jul 1 (Wed) | Eval tools: lm-evaluation-harness | Hands-on: EleutherAI's harness. Run a benchmark on a small model. Understand output format |
+| 85 | Jul 2 (Thu) | Eval tools: deepeval + ragas | Set up `deepeval` for custom evals. `ragas` for RAG evaluation. Build a simple eval pipeline |
 
-> **Enrichment for Phase 7:** (1) Anthropic "Designing AI-resistant technical evaluations" blog. (2) DL.AI "Building and Evaluating Data Agents." (3) LMSYS Chatbot Arena (chat.lmsys.org) — try judging models yourself. (4) Braintrust `autoevals` library for pre-built scoring.
+### Week 13 (Jul 3 - Jul 9)
 
-**Checkpoint:** You can design rigorous evaluations, run experiments, and make data-driven go/no-go decisions.
+| Day | Date | Topic | What to do |
+|-----|------|-------|------------|
+| 86 | Jul 3 (Fri) | A/B testing fundamentals | Statistical significance, sample size calculation, guardrail metrics. How to design an online ML experiment |
+| 87 | Jul 4 (Sat) | Experimentation advanced | Offline policy evaluation for ranking/reco. Backtesting when online experiments aren't feasible |
+| 88 | Jul 5 (Sun) | **Project:** eval framework (1/4) | Design evaluation framework for an agentic AI system (based on your LG CNS work). Define task taxonomy, metrics, test cases |
+| 89 | Jul 6 (Mon) | **Project:** eval framework (2/4) | Implement automated evaluation: task completion rate, tool use accuracy, reasoning chain quality |
+| 90 | Jul 7 (Tue) | **Project:** eval framework (3/4) | Add LLM-as-judge scoring. Compare with human annotations. Measure correlation |
+| 91 | Jul 8 (Wed) | **Project:** eval framework (4/4) | Run comparative experiments: different agent architectures, different prompting strategies. Produce a decision report |
+| 92 | Jul 9 (Thu) | Portfolio artifact scoping | Based on what you built in the eval project: define the open-source artifact scope. What's the reusable framework? What's the README? |
+
+### Week 14 (Jul 10 - Jul 11)
+
+| Day | Date | Topic | What to do |
+|-----|------|-------|------------|
+| 93 | Jul 10 (Fri) | Eval playbook | Create your personal evaluation playbook: given any new AI feature, here's how to evaluate it. This document is interview gold |
+| 94 | Jul 11 (Sat) | Phase 7 review | Review all eval material. Prepare to explain: benchmark limitations, LLM-as-judge calibration, agent eval challenges |
+
+**Checkpoint:** You can design rigorous evaluations, run experiments, and make data-driven go/no-go decisions. Your eval framework is the seed for the portfolio artifact.
 
 ---
 
-## Phase 8: Production Systems & Deployment
+## Phase 8: Production Theory (compressed: 14 → 5 days)
 
-### Week 16 (Jul 23 - Jul 29)
+You deploy AI systems daily at LG CNS. This phase covers only theory you haven't formalized.
 
-| Day | Date | Topic | What to do |
-|-----|------|-------|------------|
-| 106 | Jul 23 (Thu) | Quantization theory | GPTQ, AWQ, GGUF — how each works. Precision vs quality tradeoffs. When to use which format |
-| 107 | Jul 24 (Fri) | Quantization hands-on | Quantize a model yourself. Compare FP16 vs INT8 vs INT4 output quality. Measure speedup |
-| 108 | Jul 25 (Sat) | Inference: KV caching deep dive | KV cache mechanics (you saw this in Phase 3). Now: continuous batching, speculative decoding details |
-| 109 | Jul 26 (Sun) | Cost modeling | $/1M tokens calculation for different setups. Cloud vs on-prem tradeoffs. Build a cost spreadsheet |
-| 110 | Jul 27 (Mon) | vLLM hands-on | Install vLLM. Serve a model. Benchmark throughput and latency. Test with concurrent requests |
-| 111 | Jul 28 (Tue) | llama.cpp / ollama | Serve the same model with ollama. Compare: throughput, latency, ease of use vs vLLM |
-| 112 | Jul 29 (Wed) | TGI (Text Generation Inference) | HF's production server. Compare with vLLM and ollama. Understand the tradeoffs between all three |
-
-### Week 17 (Jul 30 - Aug 5)
+### Week 14 cont'd (Jul 12 - Jul 16)
 
 | Day | Date | Topic | What to do |
 |-----|------|-------|------------|
-| 113 | Jul 30 (Thu) | MLOps fundamentals (1/2) | Model versioning (HF Hub, MLflow). Prompt versioning and management strategies. Start: MLOps Zoomcamp Module 1 (experiment tracking with MLflow) |
-| 114 | Jul 31 (Fri) | MLOps fundamentals (2/2) | Monitoring: latency, error rates, output quality drift detection (Evidently AI). CI/CD for ML: testing model outputs. Reference: huyenchip.com/mlops |
-| 115 | Aug 1 (Sat) | Human-in-the-loop design | When to route to humans (confidence thresholds). Feedback loops: corrections → retraining data. Active learning. Read: Anthropic "Effective harnesses for long-running agents" blog |
-| 116 | Aug 2 (Sun) | **Project:** deploy service (1/4) | Design API architecture. Choose your model (fine-tuned from Phase 4 or RAG from Phase 5) |
-| 117 | Aug 3 (Mon) | **Project:** deploy (2/4) | Quantize model. Set up serving with vLLM or TGI. Build API layer (FastAPI or similar) |
-| 118 | Aug 4 (Tue) | **Project:** deploy (3/4) | Add monitoring, logging, error handling. Implement human-in-the-loop fallback for low-confidence |
-| 119 | Aug 5 (Wed) | **Project:** deploy (4/4) | Load test. Measure latency/throughput under load. Document deployment architecture and decisions |
+| 95 | Jul 12 (Sun) | Quantization theory | GPTQ, AWQ, GGUF — how each works mathematically. Precision vs quality tradeoffs. When to use which |
+| 96 | Jul 13 (Mon) | Inference optimization theory | KV caching internals, continuous batching, speculative decoding, PagedAttention. Cost modeling: $/1M tokens |
+| 97 | Jul 14 (Tue) | MLOps theory | Model versioning, output quality drift detection, CI/CD for ML. Read: huyenchip.com/mlops |
+| 98 | Jul 15 (Wed) | Human-in-the-loop design | Confidence routing, feedback loops, active learning. Read: Anthropic "Effective harnesses for long-running agents" |
+| 99 | Jul 16 (Thu) | Production review | Synthesize: create a system design template for "given X AI feature, here's the production architecture." Connect to your LG CNS deployments |
 
-> **Enrichment for Phase 8:** (1) MLOps Zoomcamp full course (github.com/DataTalksClub/mlops-zoomcamp) — go deeper on MLflow, Docker, monitoring. (2) Chip Huyen "Designing Machine Learning Systems" book — read chapters on data distribution shifts, monitoring, continual learning. (3) Stanford CS 329S ML Systems Design lectures. (4) DL.AI "Semantic Caching for AI Agents" — production latency optimization. (5) UC Berkeley Agentic AI course (rdi.berkeley.edu/agentic-ai/f25) — production agent infrastructure. (6) Evidently AI ML Observability Course (7 weeks, free) for monitoring deep dive.
-
-**Checkpoint:** You can take any HF model → quantize → serve → monitor → collect feedback → improve. The full loop.
+**Checkpoint:** You can explain the theory behind the production systems you already build.
 
 ---
 
-## Capstone: Commerce AI System
+## Portfolio Artifact: Open-Source Project (46 days)
 
-### Week 18-19 (Aug 6 - Aug 17)
+**This replaces the old capstone.** This is the single most important deliverable for your master's applications.
+
+### What to build
+
+Choose one (decide on Day 92):
+
+| Option | Description | Why it works |
+|--------|-------------|-------------|
+| **Agent Evaluation Harness** | Framework for evaluating agentic AI systems: task completion, tool use accuracy, reasoning quality, cost tracking | Combines your LG CNS agent experience + Phase 7 eval depth. No good open-source option exists. |
+| **RAG Quality Benchmark** | Standardized benchmark + evaluation suite for RAG systems across domains | Combines your production RAG experience + eval skills. Useful to the community. |
+| **Multi-Agent Coordination Library** | Patterns for multi-agent orchestration with evaluation built in | Extends your CaNiS work. Highly relevant to current industry needs. |
+
+### Phase A: Architecture & Core (Jul 17 - Jul 31, 15 days)
 
 | Day | Date | Topic | What to do |
 |-----|------|-------|------------|
-| 120 | Aug 6 (Thu) | Architecture design | Design the full system: multimodal product pipeline. Define components, data flow, API contracts |
-| 121 | Aug 7 (Fri) | Data pipeline | Build ingestion: product images + descriptions + structured specs. Preprocessing, embedding |
-| 122 | Aug 8 (Sat) | RAG layer | Product catalog RAG: vector store setup, hybrid search, metadata filtering for commerce |
-| 123 | Aug 9 (Sun) | Multimodal integration | Connect VLM for image understanding. Integrate with text + structured data pipeline |
-| 124 | Aug 10 (Mon) | Fine-tuned classifier | Apply your fine-tuned model for category/quality assessment. Connect to the pipeline |
-| 125 | Aug 11 (Tue) | Human-in-the-loop | Build the HITL component: confidence routing, human review queue, feedback collection |
-| 126 | Aug 12 (Wed) | Evaluation framework | Build offline eval: test dataset, automated metrics, comparison baselines |
-| 127 | Aug 13 (Thu) | Deploy & serve | Quantize, serve with vLLM/TGI, API layer, monitoring |
-| 128 | Aug 14 (Fri) | Integration testing | End-to-end testing. Fix issues. Load test. Edge cases |
-| 129 | Aug 15 (Sat) | Documentation & portfolio | Write up: architecture decisions, tradeoffs, evaluation results. README for GitHub |
-| 130 | Aug 16 (Sun) | Polish & demo | Build a simple demo (Gradio/Streamlit). Record a walkthrough or write a blog post |
-| 131 | Aug 17 (Mon) | Final review | Review everything. Update resume. Prepare to discuss every decision in an interview |
+| 100 | Jul 17 (Fri) | Architecture design | Define the artifact's scope, API surface, core abstractions. Draw the system diagram |
+| 101 | Jul 18 (Sat) | Project setup | GitHub repo, CI/CD, linting, testing framework, documentation structure |
+| 102 | Jul 19 (Sun) | Core module 1 | Implement the foundational data structures and interfaces |
+| 103 | Jul 20 (Mon) | Core module 2 | Implement the primary evaluation/orchestration logic |
+| 104 | Jul 21 (Tue) | Core module 3 | Implement integrations (LangChain, HF, API providers) |
+| 105 | Jul 22 (Wed) | Unit tests | Comprehensive test coverage for core modules |
+| 106 | Jul 23 (Thu) | Core module 4 | Metrics computation, scoring, reporting |
+| 107 | Jul 24 (Fri) | Core review & refactor | Review all core code. Refactor for clarity. This is portfolio code — it must be clean |
+| 108 | Jul 25 (Sat) | Integration tests | End-to-end tests with real models |
+| 109 | Jul 26 (Sun) | CLI / API layer | User-facing interface: CLI commands or Python API |
+| 110 | Jul 27 (Mon) | Documentation (1/2) | README: installation, quickstart, architecture overview |
+| 111 | Jul 28 (Tue) | Documentation (2/2) | API reference, examples, contributing guide |
+| 112 | Jul 29 (Wed) | Bug fixes + edge cases | Run against diverse inputs. Fix failures. Harden |
+| 113 | Jul 30 (Thu) | v0.1 release | Tag release, write changelog. Artifact is usable by others |
+| 114 | Jul 31 (Fri) | Dogfood | Use your own tool on a real problem. Note friction points |
+
+### Phase B: Polish & Demonstrate (Aug 1 - Aug 17, 17 days)
+
+| Day | Date | Topic | What to do |
+|-----|------|-------|------------|
+| 115 | Aug 1 (Sat) | Iteration based on dogfooding | Fix UX issues found during dogfooding |
+| 116 | Aug 2 (Sun) | Advanced feature 1 | Add differentiated feature (e.g., cost tracking, LLM-as-judge integration) |
+| 117 | Aug 3 (Mon) | Advanced feature 2 | Add second differentiator (e.g., visualization dashboard, comparative reports) |
+| 118 | Aug 4 (Tue) | Advanced feature 3 | Add third differentiator or refine existing ones |
+| 119 | Aug 5 (Wed) | Tests for new features | Full test coverage for advanced features |
+| 120 | Aug 6 (Thu) | Performance optimization | Profile, benchmark, optimize hot paths |
+| 121 | Aug 7 (Fri) | Real-world case study (1/3) | Apply artifact to a real scenario. Document setup, process, results |
+| 122 | Aug 8 (Sat) | Real-world case study (2/3) | Run full evaluation. Produce quantitative results |
+| 123 | Aug 9 (Sun) | Real-world case study (3/3) | Write up findings. This becomes the "Results" section of your README |
+| 124 | Aug 10 (Mon) | README rewrite | Polish README with real results, architecture diagrams, comparison tables |
+| 125 | Aug 11 (Tue) | Demo: Gradio/Streamlit | Build interactive demo for the artifact |
+| 126 | Aug 12 (Wed) | v0.2 release | Tag release with all improvements |
+| 127 | Aug 13 (Thu) | Community prep | Prepare for sharing: write HN/Reddit post draft, identify relevant Discord/Slack communities |
+| 128 | Aug 14 (Fri) | Code review pass | Final code quality review. Every function documented. No dead code |
+| 129 | Aug 15 (Sat) | Resume integration | Update resume with the artifact. Quantify: lines of code, test coverage, features, case study results |
+| 130 | Aug 16 (Sun) | SOP connection | Draft the paragraph in your SOP that references this artifact. How does it demonstrate your capability? |
+| 131 | Aug 17 (Mon) | v1.0 release | Final release. Artifact is portfolio-ready |
+
+### Phase C: Growth & Maintenance (Sep-Oct, outside daily timeline)
+
+After Aug 17, the artifact continues independently (no daily schedule needed):
+
+- [ ] Share on relevant communities (HN, Reddit, Twitter/X, Discord)
+- [ ] Respond to issues and PRs
+- [ ] Add features based on community feedback
+- [ ] Track stars/forks/usage for resume quantification
+- [ ] **October 2026:** Artifact is mature. Reference in all applications
 
 ---
 
@@ -305,23 +343,52 @@ Code sessions mean hands-on implementation, not just reading.
 |-------|-------|--------|------|
 | Apr | 9-30 | Phase 1 + Phase 2 start | 22 |
 | May | 1-31 | Phase 2 finish + Phase 3 + Phase 4 start | 31 |
-| Jun | 1-30 | Phase 4 finish + Phase 5 + Phase 6 start | 30 |
-| Jul | 1-31 | Phase 6 finish + Phase 7 + Phase 8 start | 31 |
-| Aug | 1-17 | Phase 8 finish + Capstone | 17 |
+| Jun | 1-30 | Phase 4 finish + Phase 5 + Phase 6 + Phase 7 start | 30 |
+| Jul | 1-31 | Phase 7 finish + Phase 8 + Portfolio start | 31 |
+| Aug | 1-17 | Portfolio artifact polish + v1.0 | 17 |
 
 ## Phase Boundaries
 
-| Phase | Start | End | Days |
-|-------|-------|-----|------|
-| 1. NN Foundations | Apr 9 | Apr 24 | 16 |
-| 2. Transformers | Apr 25 | May 13 | 19 |
-| 3. LLMs at Scale | May 14 | May 25 | 12 |
-| 4. Fine-Tuning | May 26 | Jun 11 | 17 |
-| 5. RAG & Retrieval | Jun 12 | Jun 29 | 18 |
-| 6. Multimodal | Jun 30 | Jul 9 | 10 |
-| 7. Evaluation | Jul 10 | Jul 22 | 13 |
-| 8. Production | Jul 23 | Aug 5 | 14 |
-| C. Capstone | Aug 6 | Aug 17 | 12 |
+| Phase | Start | End | Days | Change |
+|-------|-------|-----|------|--------|
+| 1. NN Foundations | Apr 9 | Apr 24 | 16 | — |
+| 2. Transformers | Apr 25 | May 13 | 19 | — |
+| 3. LLMs at Scale | May 14 | May 25 | 12 | — |
+| 4. Fine-Tuning | May 26 | Jun 11 | 17 | — |
+| 5. RAG Theory Gaps | Jun 12 | Jun 18 | 7 | **-11 days** |
+| 6. Multimodal | Jun 19 | Jun 25 | 7 | **-3 days** |
+| 7. Evaluation | Jun 26 | Jul 11 | 16 | **+3 days** |
+| 8. Production Theory | Jul 12 | Jul 16 | 5 | **-9 days** |
+| Portfolio Artifact | Jul 17 | Aug 17 | 32 | **NEW (replaces 12-day capstone)** |
+| | | **Total** | **131** | |
+
+---
+
+## How This Maps to Master's Applications
+
+| Application Component | Covered By |
+|----------------------|------------|
+| **Interview: "Explain attention"** | Phase 2 (whiteboard-ready) |
+| **Interview: "Explain scaling laws"** | Phase 3 (Chinchilla, compute-optimal) |
+| **Interview: "Walk me through fine-tuning"** | Phase 4 (LoRA/QLoRA theory + hands-on) |
+| **Interview: "How do you evaluate AI systems?"** | Phase 7 (deepest phase, interview gold) |
+| **Resume: Open-source project** | Portfolio artifact (stars, usage, case study) |
+| **SOP: Technical depth + impact** | Artifact + LG CNS work + Phase 7 eval expertise |
+| **Differentiator vs other applicants** | Production agent experience (LG CNS) + evaluation framework (rare) |
+
+---
+
+## Parallel Tracks (not in 2hr/day budget)
+
+These happen alongside the study schedule on separate time:
+
+| Track | When | Notes |
+|-------|------|-------|
+| TOEFL prep + retake | Jun-Jul 2026 | 2 attempts booked |
+| GRE prep (CMU only) | Aug-Sep 2026 | After portfolio Phase A |
+| WES ICAP | Start Jul 2026 | 6-8 week processing |
+| Recommender outreach | Aug 2026 | 3 LORs needed |
+| SOP drafting | Nov 2026 | After artifact v1.0 |
 
 ---
 
@@ -333,66 +400,9 @@ Code sessions mean hands-on implementation, not just reading.
 4. **Every project must produce a GitHub commit.** Not "I understood it" — code or it didn't happen.
 5. **Weekend = normal days.** The schedule already accounts for 7 days/week.
 6. **If stuck for >30min,** move on and revisit tomorrow with fresh eyes.
+7. **The portfolio artifact is the #1 priority after Phase 4.** If something must be cut, cut study days, not build days.
+8. **TOEFL and GRE are separate time blocks.** Don't let test prep eat into the 2hr study budget.
 
 ---
 
-## Enrichment Resources Quick Reference
-
-Use these when you finish a day early, want to go deeper, or need a different perspective.
-All free unless marked otherwise.
-
-### Courses & MOOCs
-
-| Resource | Phases | Format | URL |
-|----------|--------|--------|-----|
-| DeepLearning.AI Short Courses (11+ relevant) | P2-P8 | Video + code | deeplearning.ai/courses |
-| UC Berkeley LLM Agents MOOC | P5, P8 | Video lectures | llmagents-learning.org/f24 |
-| UC Berkeley Advanced LLM Agents | P5, P8 | Video lectures | agenticai-learning.org/sp25 |
-| UC Berkeley Agentic AI | P8 | Video lectures | rdi.berkeley.edu/agentic-ai/f25 |
-| MLOps Zoomcamp | P8 | Video + projects | github.com/DataTalksClub/mlops-zoomcamp |
-| Evidently AI ML Observability | P8 | 7-week course | evidentlyai.com |
-| Activeloop GenAI Courses | P5 | 68+ lessons | learn.activeloop.ai |
-| W&B AI Academy | P7-P8 | Video + code | wandb.ai/site/courses |
-
-### Engineering Blogs (must-reads marked with *)
-
-| Post | Phase | URL |
-|------|-------|-----|
-| * Building effective agents | P5 | anthropic.com/research/building-effective-agents |
-| * Effective context engineering | P5 | anthropic.com/engineering/effective-context-engineering-for-ai-agents |
-| * Writing effective tools for agents | P5-P8 | anthropic.com/engineering/writing-tools-for-agents |
-| * Contextual Retrieval | P5 | anthropic.com/engineering/contextual-retrieval |
-| The "think" tool | P5 | anthropic.com/engineering/claude-think-tool |
-| * Demystifying evals for AI agents | P7 | anthropic.com/engineering/demystifying-evals-for-ai-agents |
-| AI-resistant technical evaluations | P7 | anthropic.com/engineering/AI-resistant-technical-evaluations |
-| * Effective harnesses for long-running agents | P8 | anthropic.com/engineering/effective-harnesses-for-long-running-agents |
-| Advanced tool use | P8 | anthropic.com/engineering/advanced-tool-use |
-| Sebastian Raschka: 4 LLM Eval Approaches | P7 | magazine.sebastianraschka.com/p/llm-evaluation-4-approaches |
-
-### Hands-On Notebooks & Cookbooks
-
-| Resource | Phases | URL |
-|----------|--------|-----|
-| Claude Cookbooks | P5-P6 | github.com/anthropics/claude-cookbooks |
-| OpenAI Cookbook | P5 | cookbook.openai.com |
-| LlamaIndex Resources | P5 | developers.llamaindex.ai |
-| Prompt Engineering Guide | P5-P8 | promptingguide.ai |
-
-### Books
-
-| Book | Phases | Notes |
-|------|--------|-------|
-| Chip Huyen — "Designing ML Systems" | P8 | The definitive production ML book |
-| Dive into Deep Learning (d2l.ai) | P1-P2 | Free, runnable code reference |
-
-### Multimodal References
-
-| Resource | Phase | URL |
-|----------|-------|-----|
-| VLM Architecture Guide (Rohit Bandaru) | P6 | rohitbandaru.github.io/blog/Vision-Language-Models |
-| BentoML Open-Source VLM Guide | P6 | bentoml.com/blog/multimodal-ai-guide |
-| DeepLearning.AI Multimodal Search & RAG | P5-P6 | deeplearning.ai/short-courses/building-multimodal-search-and-rag |
-
----
-
-*Generated: 2026-04-09*
+*Revised: 2026-04-21 — Updated for master's application timeline*
